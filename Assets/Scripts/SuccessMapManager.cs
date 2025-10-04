@@ -20,9 +20,10 @@ public class SuccessMapManager : MonoBehaviour
 
     private void Test()
     {
+        print("AAAAA");
         for (int i = 0; i < _success.Count; i++)
         {
-            if (!_success[i].canBeSowed)
+            if (_success[i].canBeSowed)
             {
                 _success[i].ShowAllSuccess();
             }
