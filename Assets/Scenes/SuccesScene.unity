@@ -290,6 +290,10 @@ PrefabInstance:
       value: SuccessObj (3)
       objectReference: {fileID: 0}
     - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c1df15e57050db42842634eaae84ca7, type: 2}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: _successDatas
       value: 
       objectReference: {fileID: 11400000, guid: 75bf2a04e63ae4f40b96414656e15a5c, type: 2}
@@ -395,6 +399,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: bd14795672ab4be41877be6999c0e687, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -497,6 +505,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: cef07030132f6bb4baa58028b29fbc00, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -733,6 +745,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (13)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: a443e4246eafc1d4883fecc03321e536, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -835,6 +851,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: e8784c3fc6c46bd47a87acb764a4acdc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1275,6 +1295,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (15)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: bd14795672ab4be41877be6999c0e687, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1388,6 +1412,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: bd14795672ab4be41877be6999c0e687, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1502,6 +1530,10 @@ PrefabInstance:
       value: SuccessObj (2)
       objectReference: {fileID: 0}
     - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 5f1f5ccdf37067243ba817948362e44e, type: 2}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: _successDatas
       value: 
       objectReference: {fileID: 11400000, guid: 69a86d77dcc895540bb9f274f3823fe8, type: 2}
@@ -1607,6 +1639,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 11aa19135e690e540b991f6139141266, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1635,7 +1671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &955643151
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1931,6 +1967,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: bd14795672ab4be41877be6999c0e687, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2259,6 +2299,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: bd14795672ab4be41877be6999c0e687, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2449,6 +2493,10 @@ PrefabInstance:
       value: SuccessObj (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: a4d8be62e3ea7bb46bd54754dc1bb1ba, type: 2}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: _successDatas
       value: 
       objectReference: {fileID: 11400000, guid: 7c1df15e57050db42842634eaae84ca7, type: 2}
@@ -2565,6 +2613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: b73af516e2e811046b9fefd31d7f67c6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2678,6 +2730,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f3fb17d23c8b774e90c4abf4d9bec82, type: 2}
     - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: _successDatas
       value: 
@@ -2795,6 +2851,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 75bf2a04e63ae4f40b96414656e15a5c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3059,6 +3119,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: bd14795672ab4be41877be6999c0e687, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3173,6 +3237,10 @@ PrefabInstance:
       value: SuccessObj (6)
       objectReference: {fileID: 0}
     - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 69a86d77dcc895540bb9f274f3823fe8, type: 2}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: _successDatas
       value: 
       objectReference: {fileID: 11400000, guid: b73af516e2e811046b9fefd31d7f67c6, type: 2}
@@ -3226,7 +3294,6 @@ GameObject:
   - component: {fileID: 8872489293030191597}
   - component: {fileID: 1969966632572479752}
   - component: {fileID: 589701914959890906}
-  - component: {fileID: 7896231203476991388}
   m_Layer: 5
   m_Name: ListSuccess
   m_TagString: Untagged
@@ -3421,6 +3488,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuccessObj
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: 304afe798da0bb24fa4ebfbf58a8dedb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3467,41 +3538,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7896231203476991388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813214355061047000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b764edd447c16954f9d8c1f7431ca1d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SuccessMapManager
-  _success:
-  - {fileID: 7660904316167380988}
-  - {fileID: 1844777842}
-  - {fileID: 1129950712}
-  - {fileID: 643256401}
-  - {fileID: 1880501599}
-  - {fileID: 2144681985}
-  - {fileID: 2020753968}
-  - {fileID: 1926281084}
-  - {fileID: 2058494738}
-  - {fileID: 1267063385}
-  - {fileID: 712646400}
-  - {fileID: 1930314287}
-  - {fileID: 1854596975}
-  - {fileID: 2097949777}
-  - {fileID: 1699434096}
-  - {fileID: 361386707}
-  - {fileID: 1646578464}
-  - {fileID: 722893115}
-  _theKey: {fileID: 0}
-  _theList: {fileID: 0}
-  _map: {fileID: 0}
-  _button: {fileID: 0}
 --- !u!223 &8872489293030191597
 Canvas:
   m_ObjectHideFlags: 0

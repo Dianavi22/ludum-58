@@ -4,11 +4,7 @@ using UnityEngine;
 public class Success : MonoBehaviour
 {
     private SpriteRenderer _mySprite;
-     public SuccessData SuccessDatas { get; private set; }
-
-    public bool canBeShowed;
-    public bool canBeOnlyImageView;
-    public bool canBeOnlyTextView;
+    public SuccessData SuccessDatas;
 
     [SerializeField] float targetWidth;
     [SerializeField] float targetHeight;
@@ -16,12 +12,7 @@ public class Success : MonoBehaviour
     [SerializeField] TextMeshProUGUI _descriptionText;
     [SerializeField] Sprite _unknownSprite;
 
-    void Start()
-    {
-        canBeShowed = SuccessDatas.isSuccess;
-        canBeOnlyImageView = SuccessDatas.showImage;
-        canBeOnlyTextView = SuccessDatas.showText;
-    }
+
 
 
     private void ShowSuccess(Sprite sprite, string name, string description)

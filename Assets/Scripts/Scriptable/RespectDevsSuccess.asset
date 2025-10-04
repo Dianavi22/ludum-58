@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b5966c72b098e4fbf648831609382f, type: 3}
   m_Name: RespectDevsSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
-  isSuccess: 1
+  isSuccess: 0
   successName: RespectDevsSuccess
   successDescription: 
   successSprite: {fileID: 21300000, guid: 9be6490dca7027f4da0d030e13549562, type: 3}
-  successKey: HAS_QUIT_THE_GAME
-  showText: 0
+  successKey: HAS_RESPECTED_CREATORS
+  showText: 1
   showImage: 0
