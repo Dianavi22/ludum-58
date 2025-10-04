@@ -23,7 +23,7 @@ public class SuccessMapManager : MonoBehaviour
 
     private void Start()
     {
-        GetAllSuccessState();
+        //GetAllSuccessState();
         ShowStateSuccess();
         _achievementFader.FadeOut(0);
     }
@@ -60,6 +60,11 @@ public class SuccessMapManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             _achievementFader.FadeIn(2, then: () => StartCoroutine(WaitThenFadeOut()));
+        }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ShowSuccessMap();
         }
     }
 
@@ -103,11 +108,11 @@ public class SuccessMapManager : MonoBehaviour
             }
         }
        
-        if (id == _success.Count)
+        /*if (id == _success.Count)
         {
             _theKey.SetActive(true);
             _theList.SetActive(false);
-        }
+        }*/
 
     }
 

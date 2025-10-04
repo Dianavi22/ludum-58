@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Jumping Success
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
   isSuccess: 0
-  successName: Jump success
-  successDescription: 
+  successName: Jumping is good
+  successDescription: 'Everybody do the jump! '
   successSprite: {fileID: 21300000, guid: 9be6490dca7027f4da0d030e13549562, type: 3}
   successKey: JUMPING_SUCCESS
   showText: 1
