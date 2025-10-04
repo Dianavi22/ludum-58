@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public bool IsPause
+    public static bool IsPause
     {
         get; private set;
     }
@@ -17,7 +17,8 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !SuccessMapManager.isFading)
         {
             if (IsPause) { Resume(); } else { PausePlz(); }
         }
@@ -39,6 +40,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
+        if (SuccessMapManager.isFading) { return; }
         SceneManager.LoadScene(0);
     }
 }

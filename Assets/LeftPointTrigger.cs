@@ -21,8 +21,7 @@ public class LeftPointTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            PlayerPrefsUtils.SetBool(PlayerPrefsData.TO_THE_LEFT, true);
-            _successMapManager.GetAllSuccessState();
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.TO_THE_LEFT);
         }
     }
 

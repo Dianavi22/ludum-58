@@ -1,20 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using Rewards.Utils;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SuccessMapManager : MonoBehaviour
-{   
+{
     /// <summary>
     /// The achievement display duration.
     /// </summary>
-	private static readonly WaitForSeconds _displayDuration = new(5);
-    
-	[SerializeField] List<Success> _success = new List<Success>();
+    private static readonly WaitForSeconds _displayDuration = new(5);
+
+    [SerializeField] List<Success> _success = new List<Success>();
     [SerializeField] GameObject _theKey;
     [SerializeField] GameObject _theList;
     [SerializeField] GameObject _map;
     [SerializeField] GameObject _button;
+
+    public static bool isFading { get; private set; } = false;
+    [SerializeField] float _fadeDuration;
+    [SerializeField] float _fadout;
+
+    [SerializeField] TMP_Text _titleSuccessAnim;
+    [SerializeField] TMP_Text _descriptionSuccessAnim;
+    [SerializeField] Image _iconSuccessAnim;
 
     /// <summary>
     /// Achievement fader to fade in/out the panel on achievement obtained.
@@ -31,8 +41,33 @@ public class SuccessMapManager : MonoBehaviour
     private void OnDestroy()
     {
         PlayerPrefsUtils.SetBool(PlayerPrefsData.HAS_QUIT_THE_GAME, true);
-
         GetAllSuccessState();
+    }
+
+    public void LaunchSuccessAnim(string key)
+    {
+        for (int i = 0; i < _success.Count; i++)
+        {
+            if (_success[i].SuccessDatas.successKey == key)
+            {
+                _iconSuccessAnim.sprite = _success[i].SuccessDatas.successSprite;
+                _titleSuccessAnim.text = _success[i].SuccessDatas.successName;
+                _descriptionSuccessAnim.text = _success[i].SuccessDatas.successDescription;
+            }
+        }
+        if (PlayerPrefsUtils.TryGetBool(key))
+        {
+            return;
+        }
+        PlayerPrefsUtils.SetBool(key, true);
+        GetAllSuccessState();
+        try { }
+        catch
+        {
+            return;
+        }
+        isFading = true;
+        _achievementFader.FadeIn(_fadeDuration);
     }
 
     public void GetAllSuccessState()
@@ -48,27 +83,23 @@ public class SuccessMapManager : MonoBehaviour
 
     }
 
+    private void OnMouseDown()
+    {
+
+    }
+
     private void Update()
     {
-        //Test :
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetMouseButtonDown(0) && isFading)
         {
-            PlayerPrefsUtils.SetBool(PlayerPrefsData.HAS_RESPECTED_CREATORS, true);
-            GetAllSuccessState();
+            _achievementFader.FadeOut(_fadout, () => isFading = false);
         }
-
         if (Input.GetKeyDown(KeyCode.S))
         {
-            _achievementFader.FadeIn(2, then: () => StartCoroutine(WaitThenFadeOut()));
+            LaunchSuccessAnim(PlayerPrefsData.TO_THE_LEFT);
         }
-    }
 
-    private IEnumerator WaitThenFadeOut()
-    {
-        yield return _displayDuration;
-        _achievementFader.FadeOut(2);
     }
-
     private void ShowStateSuccess()
     {
         CheckAllSuccess();
@@ -102,17 +133,17 @@ public class SuccessMapManager : MonoBehaviour
                 id++;
             }
         }
-       
+
         if (id == _success.Count)
         {
             _theKey.SetActive(true);
             _theList.SetActive(false);
         }
-
     }
 
     public void ShowSuccessMap()
     {
+        if (SuccessMapManager.isFading || PauseMenu.IsPause) { return; }
         _map.SetActive(!_map.activeSelf);
     }
 }
