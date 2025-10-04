@@ -55,14 +55,15 @@ public class MovementAchievements : MonoBehaviour
 
         if (13 == _knockCounter)
         {
-            PlayerPrefsUtils.SetBool(PlayerPrefsData.KNOCK_KNOCK_KNOCK, true);
-            _successMapManager.GetAllSuccessState();
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.KNOCK_KNOCK_KNOCK);
+
+          
         }
 
         if (1 == _knockCounter)
         {
-            PlayerPrefsUtils.SetBool(PlayerPrefsData.KNOCK_SUCCESS, true);
-            _successMapManager.GetAllSuccessState();
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.KNOCK_SUCCESS);
+
         }
     }
 }

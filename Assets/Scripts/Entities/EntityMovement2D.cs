@@ -5,32 +5,32 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class EntityMovement2D : MonoBehaviour
 {
-	/// <summary>
-	/// The horizontal speed of the player.
-	/// </summary>
-	[SerializeField, Tooltip("Player horizontal speed.")] private float _horizontalSpeed;
+    /// <summary>
+    /// The horizontal speed of the player.
+    /// </summary>
+    [SerializeField, Tooltip("Player horizontal speed.")] private float _horizontalSpeed;
 
-	/// <summary>
-	/// The height of the player when jumping.
-	/// </summary>
-	[SerializeField, Tooltip("player jump height.")] private float _jumpHeight;
+    /// <summary>
+    /// The height of the player when jumping.
+    /// </summary>
+    [SerializeField, Tooltip("player jump height.")] private float _jumpHeight;
 
-	/// <summary>
-	/// The value assigned to [_rigidbody.gravityScale] when falling.
-	/// </summary>
-	[SerializeField, Tooltip("The value given to the rigidbody's gravity scale when falling")] private float _fallingGravityScale;
+    /// <summary>
+    /// The value assigned to [_rigidbody.gravityScale] when falling.
+    /// </summary>
+    [SerializeField, Tooltip("The value given to the rigidbody's gravity scale when falling")] private float _fallingGravityScale;
 
-	/// <summary>
-	/// The layers that allow the player to jump from.
-	/// </summary>
-	[SerializeField, Tooltip("What the player can jump from.")] private LayerMask _jumpableLayers;
+    /// <summary>
+    /// The layers that allow the player to jump from.
+    /// </summary>
+    [SerializeField, Tooltip("What the player can jump from.")] private LayerMask _jumpableLayers;
 
-	/// <summary>
-	/// Value applied to the rigidbody's velocity each frame when grounded and no horizontal input is provided.
-	/// </summary>
-	[SerializeField, Range(0f, 1f), Tooltip("Drag to be applied each frame when grounded.")] private float _friction;
+    /// <summary>
+    /// Value applied to the rigidbody's velocity each frame when grounded and no horizontal input is provided.
+    /// </summary>
+    [SerializeField, Range(0f, 1f), Tooltip("Drag to be applied each frame when grounded.")] private float _friction;
 
-	[SerializeField, Range(0f, 5f)] private float _velocityGravityTreshhold;
+    [SerializeField, Range(0f, 5f)] private float _velocityGravityTreshhold;
     [SerializeField] SuccessMapManager _successMapManager;
 
     /// <summary>
@@ -38,114 +38,117 @@ public class EntityMovement2D : MonoBehaviour
     /// </summary>
     private Rigidbody2D _rigidbody;
 
-	/// <summary>
-	/// Whether the entity is touching something defined with the [_jumpableLayers] mask.
-	/// </summary>
-	private bool _isOnGround;
+    /// <summary>
+    /// Whether the entity is touching something defined with the [_jumpableLayers] mask.
+    /// </summary>
+    private bool _isOnGround;
 
-	/// <summary>
-	/// Whether the entity is falling or not.
-	/// </summary>
-	private bool _isFalling;
+    /// <summary>
+    /// Whether the entity is falling or not.
+    /// </summary>
+    private bool _isFalling;
 
-	/// <summary>
-	/// The entity's rigidbody default gravity scale. 
-	/// </summary>
-	private float _baseGravityScale;
+    /// <summary>
+    /// The entity's rigidbody default gravity scale. 
+    /// </summary>
+    private float _baseGravityScale;
 
-	private Respawnable _respawnable;
-	private BoxCollider2D _collider;
+    private Respawnable _respawnable;
+    private BoxCollider2D _collider;
 
-	/// <summary>
-	/// Event raised when this entity jumps.
-	/// </summary>
-	private readonly UnityEvent _jumpEvent = new();
-	public UnityEvent JumpEvent => _jumpEvent;
+    /// <summary>
+    /// Event raised when this entity jumps.
+    /// </summary>
+    private readonly UnityEvent _jumpEvent = new();
+    public UnityEvent JumpEvent => _jumpEvent;
 
-	#region Object lifecycle
-	private void Awake()
-	{
-		_rigidbody = GetComponent<Rigidbody2D>();
-		_collider = GetComponentInChildren<BoxCollider2D>();
+    #region Object lifecycle
+    private void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _collider = GetComponentInChildren<BoxCollider2D>();
 
-		Debug.Log("Fetched respawnable " + TryGetComponent<Respawnable>(out _respawnable));
+    // Debug.Log("Fetched respawnable " + TryGetComponent<Respawnable>(out _respawnable));
 
-		if (_respawnable != null)
-		{
-			_respawnable.Respawn();
-		}
-
-		_baseGravityScale = _rigidbody.gravityScale;
-	}
-
-	private void Update()
-	{
-		// Doing a jump if on the ground.
-		if (Input.GetAxisRaw("Jump") == 1 && _isOnGround)
-		{
-			DoJump();
-		}
-
-		if (!_isOnGround)
-		{
-			_isFalling = _rigidbody.velocity.y <= _velocityGravityTreshhold;
-
-			// Updating the gravity and the gravity scale when falling.
-			if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
-			{
-				_rigidbody.gravityScale = _fallingGravityScale;
-			}
-		}
-		else
-		{
-			_isFalling = false;
-
-			// Reverting the changes from gravity and scale when back on the ground.
-			if (_rigidbody.gravityScale != _baseGravityScale)
-			{
-				_rigidbody.gravityScale = _baseGravityScale;
-			}
-		}
-	}
-
-	private void FixedUpdate()
-	{
-		_isOnGround = Physics2D.IsTouchingLayers(_collider, _jumpableLayers);
-
-		float xInput = Input.GetAxis("Horizontal");
-
-		if (0 < Mathf.Abs(xInput))
-		{
-			_rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
-		}
-
-		if (_isOnGround && xInput == 0)
-		{
-			_rigidbody.velocity *= _friction;
-		}
-
-	}
-	#endregion
-
-	#region Collision Callbacks
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.CompareTag("Death") && _respawnable != null)
-		{
-			_respawnable.Respawn();
-            PlayerPrefsUtils.SetBool(PlayerPrefsData.DEATH_SUCCESS, true);
-            _successMapManager.GetAllSuccessState();
+        if (_respawnable != null)
+        {
+            _respawnable.Respawn();
         }
-	}
-	#endregion
 
-	/// <summary>
-	/// Makes the player jump and set [_isOnGround] to false.
-	/// </summary>
-	private void DoJump()
-	{
-		_isOnGround = false;
-		_rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpHeight);
-		_jumpEvent.Invoke();
-	}
+        _baseGravityScale = _rigidbody.gravityScale;
+    }
+
+    private void Update()
+    {
+        if (SuccessMapManager.isFading || PauseMenu.IsPause) { return; }
+        // Doing a jump if on the ground.
+        if (Input.GetAxisRaw("Jump") == 1 && _isOnGround)
+        {
+            DoJump();
+        }
+
+        if (!_isOnGround)
+        {
+            _isFalling = _rigidbody.velocity.y <= _velocityGravityTreshhold;
+
+            // Updating the gravity and the gravity scale when falling.
+            if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
+            {
+                _rigidbody.gravityScale = _fallingGravityScale;
+            }
+        }
+        else
+        {
+            _isFalling = false;
+
+            // Reverting the changes from gravity and scale when back on the ground.
+            if (_rigidbody.gravityScale != _baseGravityScale)
+            {
+                _rigidbody.gravityScale = _baseGravityScale;
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+
+        if (SuccessMapManager.isFading || PauseMenu.IsPause) { return; }
+
+        _isOnGround = Physics2D.IsTouchingLayers(_collider, _jumpableLayers);
+
+        float xInput = Input.GetAxis("Horizontal");
+
+        if (0 < Mathf.Abs(xInput))
+        {
+            _rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
+        }
+
+        if (_isOnGround && xInput == 0)
+        {
+            _rigidbody.velocity *= _friction;
+        }
+
+    }
+    #endregion
+
+    #region Collision Callbacks
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Death") && _respawnable != null)
+        {
+            _respawnable.Respawn();
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.DEATH_SUCCESS);
+        }
+    }
+    #endregion
+
+    /// <summary>
+    /// Makes the player jump and set [_isOnGround] to false.
+    /// </summary>
+    private void DoJump()
+    {
+        _isOnGround = false;
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpHeight);
+        _jumpEvent.Invoke();
+    }
 }
