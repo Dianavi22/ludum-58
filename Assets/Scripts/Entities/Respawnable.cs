@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Respawnable : MonoBehaviour
 {
-    [SerializeField] Vector3 _respawnPoint;
+    [SerializeField] Transform _respawnPoint;
 
 	public void Respawn()
     {
-        gameObject.transform.position = _respawnPoint;
+        gameObject.transform.position = _respawnPoint.position;
     }
 }

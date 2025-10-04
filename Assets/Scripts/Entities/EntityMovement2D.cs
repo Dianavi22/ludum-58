@@ -53,9 +53,18 @@ public class EntityMovement2D : MonoBehaviour
 	/// </summary>
 	private float _baseGravityScale;
 
+	private Respawnable _respawnable;
+
+	#region Object lifecycle
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
+		Debug.Log("Fetched respawnable " + TryGetComponent<Respawnable>(out _respawnable));
+
+		if (_respawnable != null)
+		{
+			_respawnable.Respawn();
+		}
 
 		_baseGravity = Physics2D.gravity;
 		_baseGravityScale = _rigidbody.gravityScale;
@@ -97,7 +106,9 @@ public class EntityMovement2D : MonoBehaviour
 	{
 		_rigidbody.AddForce(new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), 0));
 	}
+	#endregion
 
+	#region Collision Callbacks
 	private void OnCollisionEnter2D(Collision2D collision)
 	{
 		if (Tools.IsLayerWithinMask(collision.gameObject.layer, _jumpableLayers))
@@ -113,6 +124,15 @@ public class EntityMovement2D : MonoBehaviour
 			_isOnGround = false;
 		}
 	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		if (collision.CompareTag("Death") && _respawnable != null)
+		{
+			_respawnable.Respawn();
+		}
+	}
+	#endregion
 
 	/// <summary>
 	/// Makes the player jump and set [_isOnGround] to false.
