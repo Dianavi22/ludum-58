@@ -211,12 +211,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalMovement
   _horizontalSpeed: 10
-  _jumpHeight: 15
-  _gravityModifier: {x: 1, y: 2}
-  _fallingGravityScale: 2.5
+  _jumpHeight: 7
+  _fallingGravityScale: 3.5
   _jumpableLayers:
     serializedVersion: 2
     m_Bits: 64
+  _friction: 0.25
+  _velocityGravityTreshhold: 3
 --- !u!114 &1689370970689725436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +272,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0

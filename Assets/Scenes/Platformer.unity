@@ -920,6 +920,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 433266585175192353, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
+      propertyPath: _groundFriction
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 433266585175192353, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
+      propertyPath: _gravityModifier.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1689370970689725436, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
       propertyPath: _respawnPoint
       value: 
