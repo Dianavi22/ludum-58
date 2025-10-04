@@ -2352,6 +2352,7 @@ GameObject:
   - component: {fileID: 1099261534}
   - component: {fileID: 1099261536}
   - component: {fileID: 1099261535}
+  - component: {fileID: 1099261537}
   m_Layer: 5
   m_Name: SuccessPanel
   m_TagString: Untagged
@@ -2419,6 +2420,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1099261533}
   m_CullTransparentMesh: 1
+--- !u!114 &1099261537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099261533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe93971473ee5ac458b9b073747f6223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1129950712 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
@@ -2914,6 +2927,7 @@ MonoBehaviour:
   _theList: {fileID: 976872716}
   _map: {fileID: 1813214355061047000}
   _button: {fileID: 955643150}
+  _achievementFader: {fileID: 1099261537}
 --- !u!4 &1584044952
 Transform:
   m_ObjectHideFlags: 0
