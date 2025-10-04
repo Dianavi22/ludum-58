@@ -52,6 +52,7 @@ public class EntityMovement2D : MonoBehaviour
 	private float _baseGravityScale;
 
 	private Respawnable _respawnable;
+	private BoxCollider2D _collider;
 
 	/// <summary>
 	/// Event raised when this entity jumps.
@@ -63,6 +64,8 @@ public class EntityMovement2D : MonoBehaviour
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody2D>();
+		_collider = GetComponentInChildren<BoxCollider2D>();
+
 		Debug.Log("Fetched respawnable " + TryGetComponent<Respawnable>(out _respawnable));
 
 		if (_respawnable != null)
@@ -105,6 +108,8 @@ public class EntityMovement2D : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		_isOnGround = Physics2D.IsTouchingLayers(_collider, _jumpableLayers);
+
 		float xInput = Input.GetAxis("Horizontal");
 
 		if (0 < Mathf.Abs(xInput))
@@ -121,22 +126,6 @@ public class EntityMovement2D : MonoBehaviour
 	#endregion
 
 	#region Collision Callbacks
-	private void OnCollisionEnter2D(Collision2D collision)
-	{
-		if (Tools.IsLayerWithinMask(collision.gameObject.layer, _jumpableLayers))
-		{
-			_isOnGround = true;
-		}
-	}
-
-	private void OnCollisionExit2D(Collision2D collision)
-	{
-		if (Tools.IsLayerWithinMask(collision.gameObject.layer, _jumpableLayers))
-		{
-			_isOnGround = false;
-		}
-	}
-
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		if (collision.CompareTag("Death") && _respawnable != null)
