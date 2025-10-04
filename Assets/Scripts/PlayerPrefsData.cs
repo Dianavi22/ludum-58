@@ -17,6 +17,9 @@ public class PlayerPrefsData
     public const string PAUSE_MENU = "PAUSE_MENU";
     public const string TO_THE_LEFT = "TO_THE_LEFT";
     public const string WINDOW_SUCCESS = "WINDOW_SUCCESS";
+    public const string DEATH_SUCCESS = "DEATH_SUCCESS";
+
+    
 
     // Other
 

@@ -23,11 +23,15 @@ public class SuccessMapManager : MonoBehaviour
         GetAllSuccessState();
     }
 
-    private void GetAllSuccessState()
+    public void GetAllSuccessState()
     {
         for (int i = 0; i < _success.Count; i++)
         {
             _success[i].SuccessDatas.isSuccess = PlayerPrefsUtils.TryGetBool(_success[i].SuccessDatas.successKey);
+            if (_success[i].SuccessDatas.isSuccess)
+            {
+                _button.SetActive(true);
+            }
         }
 
     }
@@ -57,7 +61,7 @@ public class SuccessMapManager : MonoBehaviour
                 _success[i].ShowOnlySprite();
             }
 
-            else if (_success[i].SuccessDatas.showImage)
+            else if (_success[i].SuccessDatas.showText)
             {
                 _success[i].ShowOnlyName();
             }
@@ -75,7 +79,7 @@ public class SuccessMapManager : MonoBehaviour
                 id++;
             }
         }
-
+       
         if (id == _success.Count)
         {
             _theKey.SetActive(true);

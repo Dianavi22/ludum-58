@@ -1,3 +1,4 @@
+using Rewards.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,11 +31,12 @@ public class EntityMovement2D : MonoBehaviour
 	[SerializeField, Range(0f, 1f), Tooltip("Drag to be applied each frame when grounded.")] private float _friction;
 
 	[SerializeField, Range(0f, 5f)] private float _velocityGravityTreshhold;
+    [SerializeField] SuccessMapManager _successMapManager;
 
-	/// <summary>
-	/// This entity's rigidbody2D.
-	/// </summary>
-	private Rigidbody2D _rigidbody;
+    /// <summary>
+    /// This entity's rigidbody2D.
+    /// </summary>
+    private Rigidbody2D _rigidbody;
 
 	/// <summary>
 	/// Whether the entity is touching something defined with the [_jumpableLayers] mask.
@@ -131,7 +133,9 @@ public class EntityMovement2D : MonoBehaviour
 		if (collision.CompareTag("Death") && _respawnable != null)
 		{
 			_respawnable.Respawn();
-		}
+            PlayerPrefsUtils.SetBool(PlayerPrefsData.DEATH_SUCCESS, true);
+            _successMapManager.GetAllSuccessState();
+        }
 	}
 	#endregion
 
