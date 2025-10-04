@@ -39,7 +39,7 @@ namespace Rewards.Utils
             SetInt(key, intVar);
         }
 
-        public static bool TryGetBool(string key, bool defaultValue = true)
+        public static bool TryGetBool(string key, bool defaultValue = false)
         {
             var boolVar = defaultValue;
             if (HasKey(key))
@@ -49,7 +49,7 @@ namespace Rewards.Utils
                 return boolVar;
             }
 
-            SetInt(key, 0);
+            SetInt(key, 1);
             return boolVar;
         }
     }
