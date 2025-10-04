@@ -20,12 +20,21 @@ public class SuccessMapManager : MonoBehaviour
 
     private void Test()
     {
-        print("AAAAA");
         for (int i = 0; i < _success.Count; i++)
         {
-            if (_success[i].canBeSowed)
+            if (_success[i].canBeShowed)
             {
                 _success[i].ShowAllSuccess();
+            }
+
+            if (_success[i].canBeOnlyImageView)
+            {
+                _success[i].ShowOnlySprite();
+            }
+
+            if (_success[i].canBeOnlyTextView)
+            {
+                _success[i].ShowOnlyName();
             }
         }
     }

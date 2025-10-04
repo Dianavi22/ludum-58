@@ -6,7 +6,9 @@ public class Success : MonoBehaviour
     private SpriteRenderer _mySprite;
     [SerializeField] private SuccessData _successDatas;
 
-    public bool canBeSowed;
+    public bool canBeShowed;
+    public bool canBeOnlyImageView;
+    public bool canBeOnlyTextView;
 
     [SerializeField] float targetWidth;
     [SerializeField] float targetHeight;
@@ -20,7 +22,9 @@ public class Success : MonoBehaviour
 
     void Awake()
     {
-        canBeSowed = _successDatas.isSuccess;
+        canBeShowed = _successDatas.isSuccess;
+        canBeOnlyImageView = _successDatas.showImage;
+        canBeOnlyTextView = _successDatas.showText;
         _name = _successDatas.successName;
         _description = _successDatas.successDescription;
         _sprite = _successDatas.successSprite;
