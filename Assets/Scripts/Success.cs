@@ -4,9 +4,7 @@ using UnityEngine;
 public class Success : MonoBehaviour
 {
     private SpriteRenderer _mySprite;
-    [SerializeField] private SuccessData _successDatas;
-
-    public bool canBeSowed;
+    public SuccessData SuccessDatas;
 
     [SerializeField] float targetWidth;
     [SerializeField] float targetHeight;
@@ -14,17 +12,7 @@ public class Success : MonoBehaviour
     [SerializeField] TextMeshProUGUI _descriptionText;
     [SerializeField] Sprite _unknownSprite;
 
-    private string _name;
-    private string _description;
-    private Sprite _sprite;
 
-    void Awake()
-    {
-        canBeSowed = _successDatas.isSuccess;
-        _name = _successDatas.successName;
-        _description = _successDatas.successDescription;
-        _sprite = _successDatas.successSprite;
-    }
 
 
     private void ShowSuccess(Sprite sprite, string name, string description)
@@ -46,16 +34,16 @@ public class Success : MonoBehaviour
 
     public void ShowOnlyName()
     {
-        ShowSuccess(_unknownSprite, _name, "????????");
+        ShowSuccess(_unknownSprite, SuccessDatas.successName, "?????");
     }
 
     public void ShowAllSuccess()
     {
-        ShowSuccess(_sprite, _name, _description);
+        ShowSuccess(SuccessDatas.successSprite, SuccessDatas.successName, SuccessDatas.successDescription);
     }
 
     public void ShowOnlySprite()
     {
-        ShowSuccess(_sprite, "????????", "????????");
+        ShowSuccess(SuccessDatas.successSprite, "?????", "?????");
     }
 }
