@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class NightDayCycle : MonoBehaviour
 {
     [SerializeField] float timeCycle = 5f;
+    [SerializeField] float switchCycle = 3f;
     [SerializeField] SpriteRenderer sr;
 
     float timer = 0f;
@@ -23,14 +25,38 @@ public class NightDayCycle : MonoBehaviour
         if(timer > timeCycle)
         {
             timer = 0f;
-            StartCoroutine("Cycle");
+            if(opacity == 1)
+            {
+                StartCoroutine("NightCycle");
+            }
+            else
+            {
+                StartCoroutine("DayCycle");
+            }
         }
     }
 
-    private IEnumerator Cycle(float waitTime)
+    private IEnumerator NightCycle()
     {
-        yield return new WaitForSeconds(waitTime);
-        sr.Color.a = Mathf.Lerp(opacity, timeCycle, waitTime);
+        while (timer < switchCycle)
+        {
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, Mathf.Lerp(opacity, 0, (timer / switchCycle)));
+            yield return null;
+        }
+        opacity = 0;
     }
+
+    private IEnumerator DayCycle()
+    {
+        while (timer < switchCycle)
+        {
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, Mathf.Lerp(opacity, 1, (timer / switchCycle)));
+            yield return null;
+        }
+        opacity = 1;
+    }
+
+
+
 
 }
