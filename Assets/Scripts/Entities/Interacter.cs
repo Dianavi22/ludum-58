@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Interacter : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class Interacter : MonoBehaviour
     /// Key that this interacter will react with.
     /// </summary>
     [SerializeField, Tooltip("Keycode that this interacter interacts with.")] private KeyCode _keycode;
+
+    /// <summary>
+    /// Event raised when interacting with an interactable object.
+    /// </summary>    
+    private readonly UnityEvent<IInteractable> _interactEvent = new();
+	public UnityEvent<IInteractable> InteractEvent => _interactEvent;
 
     private void Update()
     {
@@ -45,6 +52,7 @@ public class Interacter : MonoBehaviour
             }
 
             nearestInteractable?.Interact();
+            _interactEvent.Invoke(nearestInteractable);
         }
     }
 

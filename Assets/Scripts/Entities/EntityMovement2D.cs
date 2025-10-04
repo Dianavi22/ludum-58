@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class EntityMovement2D : MonoBehaviour
@@ -12,7 +13,6 @@ public class EntityMovement2D : MonoBehaviour
 	/// The height of the player when jumping.
 	/// </summary>
 	[SerializeField, Tooltip("player jump height.")] private float _jumpHeight;
-
 
 	/// <summary>
 	/// The value assigned to [_rigidbody.gravityScale] when falling.
@@ -52,6 +52,12 @@ public class EntityMovement2D : MonoBehaviour
 	private float _baseGravityScale;
 
 	private Respawnable _respawnable;
+
+	/// <summary>
+	/// Event raised when this entity jumps.
+	/// </summary>
+	private readonly UnityEvent _jumpEvent = new();
+	public UnityEvent JumpEvent => _jumpEvent;
 
 	#region Object lifecycle
 	private void Awake()
@@ -147,6 +153,6 @@ public class EntityMovement2D : MonoBehaviour
 	{
 		_isOnGround = false;
 		_rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpHeight);
-		//_rigidbody.AddForce(new Vector2(0, _jumpHeight), ForceMode2D.Impulse);
+		_jumpEvent.Invoke();
 	}
 }

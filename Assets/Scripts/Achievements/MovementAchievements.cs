@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+[RequireComponent(typeof(Interacter))]
+[RequireComponent(typeof(EntityMovement2D))]
+public class MovementAchievements : MonoBehaviour
+{   
+    /// <summary>
+    /// Reference to a movement script to track jumps.
+    /// </summary>
+    private EntityMovement2D _movement;
+
+    /// <summary>
+    /// Reference to interacter script to check interactions.
+    /// </summary>
+    private Interacter _interacter;
+
+    private int _jumpCounter;
+    private int _knockCounter;
+
+    private void Awake()
+    {
+        _movement = GetComponent<EntityMovement2D>();
+        _interacter = GetComponent<Interacter>();
+        
+        _movement.JumpEvent.AddListener(OnJump);
+        _interacter.InteractEvent.AddListener(OnInteraction);
+    }
+
+    private void OnDestroy()
+    {
+        _movement.JumpEvent.RemoveListener(OnJump);
+        _interacter.InteractEvent.RemoveListener(OnInteraction);
+    }
+
+    private void OnJump()
+    {
+        _jumpCounter++;
+
+        if (50 == _jumpCounter)
+        {
+            Debug.Log("50 jumped achieved!");
+        }
+    }
+
+    private void OnInteraction(IInteractable interactable)
+    {
+        if (interactable is Door)
+        {
+            _knockCounter++;
+        }
+
+        if (13 == _knockCounter)
+        {
+            Debug.Log("13 knocks achieved!");
+        }
+    }
+}
