@@ -4,7 +4,7 @@ using UnityEngine;
 public class Success : MonoBehaviour
 {
     private SpriteRenderer _mySprite;
-    [SerializeField] private SuccessData _successDatas;
+     public SuccessData SuccessDatas { get; private set; }
 
     public bool canBeShowed;
     public bool canBeOnlyImageView;
@@ -16,18 +16,11 @@ public class Success : MonoBehaviour
     [SerializeField] TextMeshProUGUI _descriptionText;
     [SerializeField] Sprite _unknownSprite;
 
-    private string _name;
-    private string _description;
-    private Sprite _sprite;
-
-    void Awake()
+    void Start()
     {
-        canBeShowed = _successDatas.isSuccess;
-        canBeOnlyImageView = _successDatas.showImage;
-        canBeOnlyTextView = _successDatas.showText;
-        _name = _successDatas.successName;
-        _description = _successDatas.successDescription;
-        _sprite = _successDatas.successSprite;
+        canBeShowed = SuccessDatas.isSuccess;
+        canBeOnlyImageView = SuccessDatas.showImage;
+        canBeOnlyTextView = SuccessDatas.showText;
     }
 
 
@@ -50,16 +43,16 @@ public class Success : MonoBehaviour
 
     public void ShowOnlyName()
     {
-        ShowSuccess(_unknownSprite, _name, "????????");
+        ShowSuccess(_unknownSprite, SuccessDatas.successName, "?????");
     }
 
     public void ShowAllSuccess()
     {
-        ShowSuccess(_sprite, _name, _description);
+        ShowSuccess(SuccessDatas.successSprite, SuccessDatas.successName, SuccessDatas.successDescription);
     }
 
     public void ShowOnlySprite()
     {
-        ShowSuccess(_sprite, "????????", "????????");
+        ShowSuccess(SuccessDatas.successSprite, "?????", "?????");
     }
 }
