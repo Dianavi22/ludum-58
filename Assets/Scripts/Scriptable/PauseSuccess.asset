@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PauseSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
   isSuccess: 0
-  successName: PauseSuccess
-  successDescription: 
+  successName: ZA WARUDO
+  successDescription: Try shouting TIID KLO UL
   successSprite: {fileID: 21300000, guid: 9be6490dca7027f4da0d030e13549562, type: 3}
   successKey: PAUSE_MENU
   showText: 0

@@ -33,7 +33,7 @@ public class SuccessMapManager : MonoBehaviour
 
     private void Start()
     {
-        GetAllSuccessState();
+        //GetAllSuccessState();
         ShowStateSuccess();
         _achievementFader.FadeOut(0);
     }
@@ -98,6 +98,12 @@ public class SuccessMapManager : MonoBehaviour
         {
             LaunchSuccessAnim(PlayerPrefsData.TO_THE_LEFT);
         }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            ShowSuccessMap();
+        }
+    }
 
     }
     private void ShowStateSuccess()
