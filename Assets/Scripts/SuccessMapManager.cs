@@ -1,19 +1,31 @@
+using System.Collections;
 using System.Collections.Generic;
 using Rewards.Utils;
 using UnityEngine;
 
 public class SuccessMapManager : MonoBehaviour
-{
-    [SerializeField] List<Success> _success = new List<Success>();
+{   
+    /// <summary>
+    /// The achievement display duration.
+    /// </summary>
+	private static readonly WaitForSeconds _displayDuration = new(5);
+    
+	[SerializeField] List<Success> _success = new List<Success>();
     [SerializeField] GameObject _theKey;
     [SerializeField] GameObject _theList;
     [SerializeField] GameObject _map;
     [SerializeField] GameObject _button;
 
+    /// <summary>
+    /// Achievement fader to fade in/out the panel on achievement obtained.
+    /// </summary>
+    [SerializeField] private UIFader _achievementFader;
+
     private void Start()
     {
         GetAllSuccessState();
         ShowStateSuccess();
+        _achievementFader.FadeOut(0);
     }
 
     private void OnDestroy()
@@ -44,6 +56,17 @@ public class SuccessMapManager : MonoBehaviour
             PlayerPrefsUtils.SetBool(PlayerPrefsData.HAS_RESPECTED_CREATORS, true);
             GetAllSuccessState();
         }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            _achievementFader.FadeIn(2, then: () => StartCoroutine(WaitThenFadeOut()));
+        }
+    }
+
+    private IEnumerator WaitThenFadeOut()
+    {
+        yield return _displayDuration;
+        _achievementFader.FadeOut(2);
     }
 
     private void ShowStateSuccess()
