@@ -46,13 +46,12 @@ public class Success : MonoBehaviour
 
     public void ShowOnlyName()
     {
-        ShowSuccess(_unknownSprite, "dwdwdw", "????????");
+        ShowSuccess(_unknownSprite, _name, "????????");
     }
 
     public void ShowAllSuccess()
     {
-        print("AAAA");
-        ShowSuccess(_sprite, "dwdwdw", "dwdwdw");
+        ShowSuccess(_sprite, _name, _description);
     }
 
     public void ShowOnlySprite()
