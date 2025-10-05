@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Rewards.Utils;
 using UnityEngine;
 
 [RequireComponent(typeof(Interacter))]
@@ -15,7 +16,7 @@ public class MovementAchievements : MonoBehaviour
     /// Reference to interacter script to check interactions.
     /// </summary>
     private Interacter _interacter;
-
+    [SerializeField] SuccessMapManager _successMapManager;
     private int _jumpCounter;
     private int _knockCounter;
 
@@ -38,9 +39,10 @@ public class MovementAchievements : MonoBehaviour
     {
         _jumpCounter++;
 
-        if (50 == _jumpCounter)
+        if (70 == _jumpCounter)
         {
-            Debug.Log("50 jumped achieved!");
+            PlayerPrefsUtils.SetBool(PlayerPrefsData.JUMPING_SUCCESS, true);
+            _successMapManager.GetAllSuccessState();
         }
     }
 
@@ -53,7 +55,15 @@ public class MovementAchievements : MonoBehaviour
 
         if (13 == _knockCounter)
         {
-            Debug.Log("13 knocks achieved!");
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.KNOCK_KNOCK_KNOCK);
+
+          
+        }
+
+        if (1 == _knockCounter)
+        {
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.KNOCK_SUCCESS);
+
         }
     }
 }

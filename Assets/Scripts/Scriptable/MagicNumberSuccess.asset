@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MagicNumberSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
   isSuccess: 0
-  successName: MagicNumberSuccess
-  successDescription: 
+  successName: Nice *lenny's face*
+  successDescription: The funny number
   successSprite: {fileID: 21300000, guid: 9be6490dca7027f4da0d030e13549562, type: 3}
   successKey: MAGIC_NUMBER
   showText: 1

@@ -1,16 +1,19 @@
+using Rewards.Utils;
 using UnityEngine;
 
 public class Credits : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] SuccessMapManager _successMapManager;
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.HAS_RESPECTED_CREATORS);
+        }
     }
 }

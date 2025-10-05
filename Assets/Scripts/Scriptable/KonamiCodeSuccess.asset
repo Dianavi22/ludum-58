@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: KonamiCodeSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
   isSuccess: 0
-  successName: Konami code
-  successDescription: 
+  successName: Old but gold
+  successDescription: It's old... but it checks out
   successSprite: {fileID: 21300000, guid: 9be6490dca7027f4da0d030e13549562, type: 3}
   successKey: KONAMI_CODE
   showText: 1

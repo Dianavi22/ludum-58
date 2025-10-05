@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Success : MonoBehaviour
 {
@@ -8,8 +9,8 @@ public class Success : MonoBehaviour
 
     [SerializeField] float targetWidth;
     [SerializeField] float targetHeight;
-    [SerializeField] TextMeshProUGUI _titleText;
-    [SerializeField] TextMeshProUGUI _descriptionText;
+    [SerializeField] TextMeshPro _titleText;
+    [SerializeField] TextMeshPro _descriptionText;
     [SerializeField] Sprite _unknownSprite;
 
 
