@@ -34,6 +34,11 @@ public class EntityMovement2D : MonoBehaviour
     [SerializeField] SuccessMapManager _successMapManager;
 
     /// <summary>
+    /// The box collider used to check if the player is grounded.
+    /// </summary>
+    [SerializeField] private BoxCollider2D _groundChecker;
+
+    /// <summary>
     /// This entity's rigidbody2D.
     /// </summary>
     private Rigidbody2D _rigidbody;
@@ -116,8 +121,8 @@ public class EntityMovement2D : MonoBehaviour
         if (SuccessMapManager.isFading || PauseMenu.IsPause || PauseMenu.IsMainMenu)
             return;
 
-        _isOnGround = Physics2D.IsTouchingLayers(_collider, _jumpableLayers);
-
+        _isOnGround = 0 < Physics2D.OverlapAreaAll(_groundChecker.bounds.min, _groundChecker.bounds.max, _jumpableLayers).Length;
+        
         float xInput = Input.GetAxis("Horizontal");
         bool hasInput = Mathf.Abs(xInput) > 0.01f || Input.anyKey;
 
