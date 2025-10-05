@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager.Requests;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class SequenceDetector : MonoBehaviour
