@@ -14,6 +14,9 @@ public class PauseMenu : MonoBehaviour
     {
         get; private set;
     }
+
+    public static bool IsInTheEnd;
+    
     [SerializeField] GameObject _pauseMenu;
     [SerializeField] GameObject _mainMenu;
     [SerializeField] PausePanelController _ppc;
@@ -27,7 +30,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
 
-        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !SuccessMapManager.IsFading && !IsMainMenu)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !SuccessMapManager.IsFading && !IsMainMenu && !IsInTheEnd)
         {
             if (IsPause) { Resume(); } else { PausePlz(); }
         }

@@ -20,6 +20,7 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] GameObject _map;
     [SerializeField] GameObject _button;
     [SerializeField] GameObject _successPanel;
+    [SerializeField] GameObject _theEndPanel;
     [SerializeField] private PauseMenu _pauseMenu;
 
     public static bool IsFading { get; private set; } = false;
@@ -43,6 +44,8 @@ public class SuccessMapManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerPrefsUtils.SetBool(PlayerPrefsData.KONAMI_CODE, false);
+        PlayerPrefsUtils.SetBool(PlayerPrefsData.FINAL_SUCCESS, false);
         _achievementFader.FadeOut(0);
         GetAllSuccessState();
         ShowStateSuccess();
@@ -96,13 +99,19 @@ public class SuccessMapManager : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDestroy()
     {
-        PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, true);
+        if (!CheckFinal())
+        {
+            PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, true);
+        }
     }
 #endif
 
     private void OnApplicationQuit()
     {
-        PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, true);
+        if (!CheckFinal())
+        {
+            PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, true);
+        }
     }
 
     public void LaunchSuccessAnim(string key)
@@ -177,6 +186,11 @@ public class SuccessMapManager : MonoBehaviour
                 {
                     Invoke("TriggerEnding", 0.5f);
                 }
+
+                if (CheckFinal())
+                {
+                    Invoke("ShowTheEnd", 0.5f);
+                }
             });
         }
 
@@ -185,11 +199,24 @@ public class SuccessMapManager : MonoBehaviour
         {
             ShowSuccessMap();
         }
+
+        if (Input.anyKeyDown && _theEndPanel.activeInHierarchy && _theEndPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, false);
+            Application.Quit();
+        }
     }
 
     private void TriggerEnding()
     {
         LaunchSuccessAnim(PlayerPrefsData.FINAL_SUCCESS);
+    }
+
+    private void ShowTheEnd()
+    {
+        PauseMenu.IsInTheEnd = true;
+        _theEndPanel.SetActive(true);
     }
 
     private void ShowStateSuccess()
@@ -221,6 +248,11 @@ public class SuccessMapManager : MonoBehaviour
     private bool CheckAllSuccess()
     {
         return _success.Except(_success.Where(success => success.SuccessDatas.successKey == PlayerPrefsData.FINAL_SUCCESS)).All(success => success.SuccessDatas.isSuccess);
+    }
+
+    private bool CheckFinal()
+    {
+        return _success.All(success => success.SuccessDatas.isSuccess);
     }
 
     public void ShowSuccessMap()
