@@ -118,7 +118,7 @@ public class EntityMovement2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (SuccessMapManager.isFading || PauseMenu.IsPause || PauseMenu.IsMainMenu)
+        if (SuccessMapManager.IsFading || PauseMenu.IsPause || PauseMenu.IsMainMenu)
             return;
 
         _isOnGround = 0 < Physics2D.OverlapAreaAll(_groundChecker.bounds.min, _groundChecker.bounds.max, _jumpableLayers).Length;
