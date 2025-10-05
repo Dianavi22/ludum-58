@@ -104,7 +104,7 @@ public class SuccessMapManager : MonoBehaviour
 
     public void LaunchSuccessAnim(string key)
     {
-        Success success = _success.First(sucess => sucess.SuccessDatas.successKey == key);
+        Success success = _success.FirstOrDefault(sucess => sucess.SuccessDatas.successKey == key);
 
         if (success == null)
         {
