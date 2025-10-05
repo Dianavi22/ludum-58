@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Rewards.Utils;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -38,6 +39,9 @@ public class EntityMovement2D : MonoBehaviour
     [SerializeField] ParticleSystem _hitFloorPart;
     [SerializeField] ParticleSystem _deathPart;
     [SerializeField] ShakyCam _sc;
+    [SerializeField] Animator _animator;
+    [SerializeField] SpriteRenderer _spriteRenderer;
+
     /// <summary>
     /// The box collider used to check if the player is grounded.
     /// </summary>
@@ -107,6 +111,8 @@ public class EntityMovement2D : MonoBehaviour
 
             if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale * 2)
             {
+                _animator.SetBool("jumping", false);
+                _animator.SetBool("falling", true);
                 _rigidbody.gravityScale = _fallingGravityScale * 2;
             }
             else if (!_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
@@ -117,6 +123,7 @@ public class EntityMovement2D : MonoBehaviour
         else
         {
             _isFalling = false;
+            _animator.SetBool("falling", false);
 
             if (_rigidbody.gravityScale != _baseGravityScale)
             {
@@ -152,16 +159,22 @@ public class EntityMovement2D : MonoBehaviour
 
             if (Mathf.Abs(xInput) > 0.01f)
             {
+                _animator.SetBool("walking", true);
                 _rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
+                _spriteRenderer.flipX = xInput < 0;
 
                 if (_isOnGround && !_walkPart.isPlaying)
+                {
                     _walkPart.Play();
+                    _animator.SetBool("jumping", false);
+                }
             }
 
-            if (_isOnGround && xInput == 0)
+            if (_isOnGround && xInput == 0)                             
             {
                 _rigidbody.velocity *= _friction;
                 _walkPart.Stop();
+                _animator.SetBool("walking", false);
             }
         }
         else
@@ -169,7 +182,11 @@ public class EntityMovement2D : MonoBehaviour
             idleTimer += Time.fixedDeltaTime;
 
             if (_walkPart.isPlaying)
+            {
                 _walkPart.Stop();
+                _animator.SetBool("walking", false);
+            }
+                
 
             if (idleTimer >= idleTimeMax)
             {
@@ -210,11 +227,13 @@ public class EntityMovement2D : MonoBehaviour
     }
     #endregion
 
-    /// <summary>
+    /// <summary>                                       
     /// Makes the player jump and set [_isOnGround] to false.
     /// </summary>
     private void DoJump()
     {
+        _animator.SetBool("walking", false);
+        _animator.SetBool("jumping", true);
         _rigidbody.gravityScale = _fallingGravityScale;
         idleTimer = 0f;
         _isOnGround = false;
