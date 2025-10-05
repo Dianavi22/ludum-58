@@ -39,6 +39,7 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] PostProcessVolume m_Volume;
     [SerializeField] Vignette m_Vignette;
     [SerializeField] List<Animator> _successAnimators;
+    [SerializeField] ParticleSystem _glowSuccessPart;
 
     private void Start()
     {
@@ -127,6 +128,15 @@ public class SuccessMapManager : MonoBehaviour
         _achievementFader.FadeIn(_fadeDuration);
         FadeInVignette();
         _successAnimators.ForEach(animator => animator.SetBool("IsVisible", true));
+        Invoke("GlowPart", 0.60f);
+
+    }
+
+    private void GlowPart()
+    {
+        _glowSuccessPart.gameObject.SetActive(true);
+        _glowSuccessPart.Play();
+
     }
 
     public void GetAllSuccessState()
@@ -149,8 +159,10 @@ public class SuccessMapManager : MonoBehaviour
             {
                 IsFading = false;
                 ClearSuccessPanel();
-                _successAnimators.ForEach(animator => animator.SetBool("IsVisible", false));
+                _successAnimators.ForEach(animator => animator.SetBool("IsVisible", false) );
                 FadeOutVignette();
+                _glowSuccessPart.gameObject.SetActive(false);
+
             });
         }
 
