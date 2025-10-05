@@ -24,7 +24,7 @@ public class PlayerPrefsData
 
     // Other
 
-    public const string IS_THE_FIRST_TIME = "IS_THE_FIRST_TIME";
+    public const string IS_NOT_THE_FIRST_TIME = "IS_NOT_THE_FIRST_TIME";
 
 
 

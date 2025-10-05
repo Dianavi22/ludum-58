@@ -37,16 +37,13 @@ public class PauseMenu : MonoBehaviour
     {
         IsPause = true;
         _pauseMenu.SetActive(true);
-        Time.timeScale = 0;
         _succesMapManager.LaunchSuccessAnim(PlayerPrefsData.PAUSE_MENU);
-
     }
 
     public void Resume()
     {
         IsPause = false;
         _pauseMenu.SetActive(false);
-        Time.timeScale = 1;
         if (_ppc.Volume == 69)
         {
             _succesMapManager.LaunchSuccessAnim(PlayerPrefsData.MAGIC_NUMBER);

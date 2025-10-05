@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b5966c72b098e4fbf648831609382f, type: 3}
   m_Name: QuitSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
-  isSuccess: 1
+  isSuccess: 0
   successName: Doubting? Restarting!
   successDescription: Did you try turning it on and off again?
   successSprite: {fileID: 21300000, guid: 513ea8cbf22afbe4b8297661ae864868, type: 3}

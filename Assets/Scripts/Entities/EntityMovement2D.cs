@@ -32,7 +32,7 @@ public class EntityMovement2D : MonoBehaviour
     /// </summary>
     [SerializeField, Range(0f, 1f), Tooltip("Drag to be applied each frame when grounded.")] private float _friction;
 
-    [SerializeField, Range(0f, 5f)] private float _velocityGravityTreshhold;
+    [SerializeField] private float _velocityGravityTreshhold;
     [SerializeField] SuccessMapManager _successMapManager;
 
     [SerializeField] ParticleSystem _walkPart;
@@ -67,12 +67,9 @@ public class EntityMovement2D : MonoBehaviour
 
     private Respawnable _respawnable;
     private BoxCollider2D _collider;
-
-    /// <summary>
-    /// Event raised when this entity jumps.
-    /// </summary>
-    private readonly UnityEvent _jumpEvent = new();
-    public UnityEvent JumpEvent => _jumpEvent;
+    private int _jumpCounter;
+    [SerializeField] Transform _highestPoint;
+    private bool _jumpedHigher;
 
     #region Object lifecycle
     private void Awake()
@@ -94,9 +91,15 @@ public class EntityMovement2D : MonoBehaviour
 
     private void Update()
     {
-        // Saut si au sol
-        if (Input.GetAxisRaw("Jump") == 1 && _isOnGround)
+        if (PauseMenu.IsPause)
         {
+            return;
+        }
+
+        // Saut si au sol
+        if (Input.GetKeyDown(KeyCode.Space) && _isOnGround)
+        {
+            _jumpedHigher = _highestPoint.position.y <= transform.position.y;
             DoJump();
         }
 
@@ -104,7 +107,11 @@ public class EntityMovement2D : MonoBehaviour
         {
             _isFalling = _rigidbody.velocity.y <= _velocityGravityTreshhold;
 
-            if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
+            if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale * 2)
+            {
+                _rigidbody.gravityScale = _fallingGravityScale * 2;
+            }
+            else if (!_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
             {
                 _animator.SetBool("jumping", false);
                 _animator.SetBool("falling", true);
@@ -189,11 +196,21 @@ public class EntityMovement2D : MonoBehaviour
     #endregion
 
     #region Collision Callbacks
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 6 && _jumpedHigher)
+        {
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.MEGA_JUMP);
+        }
+        
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Death") && _respawnable != null)
         {
-            _sc.ShakyCameCustom(0.15f,0.3f);
+            _sc.ShakyCameCustom(0.15f, 0.3f);
             _deathPart.gameObject.transform.position = new Vector3(transform.position.x, -5, 0);
             _deathPart.Play();
             Invoke("Respawn", 0.3f);
@@ -212,9 +229,16 @@ public class EntityMovement2D : MonoBehaviour
     /// </summary>
     private void DoJump()
     {
-        _isOnGround = false;
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpHeight);
-        _jumpEvent.Invoke();
         _animator.SetBool("jumping", true);
+        _rigidbody.gravityScale = _fallingGravityScale;
+        idleTimer = 0f;
+        _isOnGround = false;
+        _rigidbody.AddForce(Vector2.up * _jumpHeight, ForceMode2D.Impulse);
+        _jumpCounter++;
+
+        if (_jumpCounter == 50)
+        {
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.JUMPING_SUCCESS);
+        }
     }
 }

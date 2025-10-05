@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ChestSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
   isSuccess: 0
-  successName: Small is justice
-  successDescription: Size does not matter.... but taste does!
+  successName: LOOT LOOT!
+  successDescription: Amazing chest ahead
   successSprite: {fileID: 21300000, guid: 7d4e8b410b4f60445918da02205c6c98, type: 3}
   successKey: CHEST_SUCCESS
-  showText: 0
-  showImage: 1
+  showText: 1
+  showImage: 0

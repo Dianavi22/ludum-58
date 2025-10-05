@@ -12,9 +12,21 @@ public class Success : MonoBehaviour
     [SerializeField] TextMeshPro _titleText;
     [SerializeField] TextMeshPro _descriptionText;
     [SerializeField] Sprite _unknownSprite;
+    [SerializeField] ParticleSystem _particle;
+    public ParticleSystem Particle => _particle;
 
+    private void OnEnable()
+    {
+        if (SuccessDatas.isSuccess)
+        {
+            _particle.Play();
+        }
+    }
 
-
+    private void OnDisable()
+    {
+        _particle.Stop();
+    }
 
     private void ShowSuccess(Sprite sprite, string name, string description)
     {
@@ -46,5 +58,10 @@ public class Success : MonoBehaviour
     public void ShowOnlySprite()
     {
         ShowSuccess(SuccessDatas.successSprite, "?????", "?????");
+    }
+
+    public void ShowNothing()
+    {
+        ShowSuccess(_unknownSprite, "?????", "?????");
     }
 }
