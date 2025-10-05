@@ -1,5 +1,6 @@
 using System.Runtime.CompilerServices;
 using Rewards.Utils;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -38,6 +39,7 @@ public class EntityMovement2D : MonoBehaviour
     [SerializeField] ParticleSystem _hitFloorPart;
     [SerializeField] ParticleSystem _deathPart;
     [SerializeField] ShakyCam _sc;
+    [SerializeField] Animator _animator;
     /// <summary>
     /// The box collider used to check if the player is grounded.
     /// </summary>
@@ -104,12 +106,15 @@ public class EntityMovement2D : MonoBehaviour
 
             if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
             {
+                _animator.SetBool("jumping", false);
+                _animator.SetBool("falling", true);
                 _rigidbody.gravityScale = _fallingGravityScale;
             }
         }
         else
         {
             _isFalling = false;
+            _animator.SetBool("falling", false);
 
             if (_rigidbody.gravityScale != _baseGravityScale)
             {
@@ -145,16 +150,21 @@ public class EntityMovement2D : MonoBehaviour
 
             if (Mathf.Abs(xInput) > 0.01f)
             {
+                _animator.SetBool("walking", true);
                 _rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
 
                 if (_isOnGround && !_walkPart.isPlaying)
+                {
                     _walkPart.Play();
+                    _animator.SetBool("jumping", false);
+                }
             }
 
             if (_isOnGround && xInput == 0)
             {
                 _rigidbody.velocity *= _friction;
                 _walkPart.Stop();
+                _animator.SetBool("walking", false);
             }
         }
         else
@@ -162,7 +172,11 @@ public class EntityMovement2D : MonoBehaviour
             idleTimer += Time.fixedDeltaTime;
 
             if (_walkPart.isPlaying)
+            {
                 _walkPart.Stop();
+                _animator.SetBool("walking", false);
+            }
+                
 
             if (idleTimer >= idleTimeMax)
             {
@@ -201,5 +215,6 @@ public class EntityMovement2D : MonoBehaviour
         _isOnGround = false;
         _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpHeight);
         _jumpEvent.Invoke();
+        _animator.SetBool("jumping", true);
     }
 }
