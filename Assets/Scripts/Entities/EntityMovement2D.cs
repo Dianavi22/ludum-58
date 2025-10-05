@@ -68,7 +68,7 @@ public class EntityMovement2D : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponentInChildren<BoxCollider2D>();
 
-        // Debug.Log("Fetched respawnable " + TryGetComponent<Respawnable>(out _respawnable));
+        TryGetComponent<Respawnable>(out _respawnable);
 
         if (_respawnable != null)
         {

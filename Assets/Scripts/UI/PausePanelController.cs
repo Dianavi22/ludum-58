@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +25,11 @@ public class PausePanelController : MonoBehaviour
     /// The current volume. Will not be updated to 0 if muted through the mute button.
     /// </summary>
     private float _volume;
+
+    /// <summary>
+    /// Gets the percentage of the volume.
+    /// </summary>
+    public float Volume => Mathf.RoundToInt(_volume * 100);
 
     /// <summary>
     /// Save of the previous volume when muting through the mute button.
