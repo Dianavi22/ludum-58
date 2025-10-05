@@ -9,16 +9,25 @@ public class PauseMenu : MonoBehaviour
     {
         get; private set;
     }
+
+    public static bool IsMainMenu
+    {
+        get; private set;
+    }
     [SerializeField] GameObject _pauseMenu;
+    [SerializeField] GameObject _mainMenu;
+    [SerializeField] PausePanelController _ppc;
+    [SerializeField] SuccessMapManager _succesMapManager;
     void Start()
     {
         Resume();
+        IsMainMenu = false;
     }
 
     void Update()
     {
 
-        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !SuccessMapManager.isFading)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !SuccessMapManager.isFading && !IsMainMenu)
         {
             if (IsPause) { Resume(); } else { PausePlz(); }
         }
@@ -29,6 +38,8 @@ public class PauseMenu : MonoBehaviour
         IsPause = true;
         _pauseMenu.SetActive(true);
         Time.timeScale = 0;
+        _succesMapManager.LaunchSuccessAnim(PlayerPrefsData.PAUSE_MENU);
+
     }
 
     public void Resume()
@@ -36,11 +47,19 @@ public class PauseMenu : MonoBehaviour
         IsPause = false;
         _pauseMenu.SetActive(false);
         Time.timeScale = 1;
+        if(_ppc.SliderValue == 69)
+        {
+            _succesMapManager.LaunchSuccessAnim(PlayerPrefsData.MAGIC_NUMBER);
+        }
     }
 
     public void MainMenu()
     {
         if (SuccessMapManager.isFading) { return; }
-        SceneManager.LoadScene(0);
+        Resume();
+        IsMainMenu = true;
+        _mainMenu.SetActive(true);
+
+
     }
 }

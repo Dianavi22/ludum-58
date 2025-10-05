@@ -68,7 +68,7 @@ public class EntityMovement2D : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponentInChildren<BoxCollider2D>();
 
-    // Debug.Log("Fetched respawnable " + TryGetComponent<Respawnable>(out _respawnable));
+        // Debug.Log("Fetched respawnable " + TryGetComponent<Respawnable>(out _respawnable));
 
         if (_respawnable != null)
         {
@@ -80,7 +80,6 @@ public class EntityMovement2D : MonoBehaviour
 
     private void Update()
     {
-        if (SuccessMapManager.isFading || PauseMenu.IsPause) { return; }
         // Doing a jump if on the ground.
         if (Input.GetAxisRaw("Jump") == 1 && _isOnGround)
         {
@@ -109,26 +108,45 @@ public class EntityMovement2D : MonoBehaviour
         }
     }
 
+    [SerializeField] private float idleTimeMax ; 
+    private float idleTimer = 0f;
+
     private void FixedUpdate()
     {
-
-        if (SuccessMapManager.isFading || PauseMenu.IsPause) { return; }
+        if (SuccessMapManager.isFading || PauseMenu.IsPause || PauseMenu.IsMainMenu)
+            return;
 
         _isOnGround = Physics2D.IsTouchingLayers(_collider, _jumpableLayers);
 
         float xInput = Input.GetAxis("Horizontal");
+        bool hasInput = Mathf.Abs(xInput) > 0.01f || Input.anyKey;
 
-        if (0 < Mathf.Abs(xInput))
+        if (hasInput)
         {
-            _rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
-        }
+            idleTimer = 0f;
 
-        if (_isOnGround && xInput == 0)
+            if (Mathf.Abs(xInput) > 0.01f)
+            {
+                _rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
+            }
+
+            if (_isOnGround && xInput == 0)
+            {
+                _rigidbody.velocity *= _friction;
+            }
+        }
+        else
         {
-            _rigidbody.velocity *= _friction;
-        }
+            idleTimer += Time.fixedDeltaTime;
 
+            if (idleTimer >= idleTimeMax)
+            {
+                _successMapManager.LaunchSuccessAnim(PlayerPrefsData.AFK_SUCCESS);
+                idleTimer = 0f; 
+            }
+        }
     }
+
     #endregion
 
     #region Collision Callbacks

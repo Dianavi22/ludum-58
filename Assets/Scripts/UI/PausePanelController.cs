@@ -1,9 +1,12 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PausePanelController : MonoBehaviour
 {
+    [SerializeField] SuccessMapManager successMapManager;
+    public float SliderValue { get; private set; }
     /// <summary>
     /// The volume slider associated with this pause panel.
     /// </summary>
@@ -46,6 +49,7 @@ public class PausePanelController : MonoBehaviour
     public void OnFullscreenPressed()
     {
         Screen.fullScreen = !Screen.fullScreen;
+        successMapManager.LaunchSuccessAnim(PlayerPrefsData.WINDOW_SUCCESS);
         //TODO: persistant data
     }
 
@@ -71,6 +75,8 @@ public class PausePanelController : MonoBehaviour
     public void OnVolumeChanged()
     {
         ChangeVolume( _slider.value);
+
+
     }
 
     /// <summary>
@@ -99,6 +105,8 @@ public class PausePanelController : MonoBehaviour
         _volume = value;
         _isMuted = value == 0;
         _volumeBarTMP.text = Mathf.RoundToInt(_volume * 100) + "%";
+        SliderValue = value;
+
         _muteButtonSwapper.SwapTo(!_isMuted);
     }
 }
