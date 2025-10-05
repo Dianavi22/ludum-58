@@ -9988,7 +9988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalMovement
   _horizontalSpeed: 10
-  _jumpHeight: 8
+  _jumpHeight: 15
   _fallingGravityScale: 3.5
   _jumpableLayers:
     serializedVersion: 2
@@ -10001,6 +10001,7 @@ MonoBehaviour:
   _deathPart: {fileID: 0}
   _sc: {fileID: 0}
   _groundChecker: {fileID: 3008139285240569052}
+  _highestPoint: {fileID: 0}
   idleTimeMax: 30
 --- !u!114 &1689370970689725436
 MonoBehaviour:

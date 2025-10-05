@@ -66,6 +66,8 @@ public class EntityMovement2D : MonoBehaviour
     private Respawnable _respawnable;
     private BoxCollider2D _collider;
     private int _jumpCounter;
+    [SerializeField] Transform _highestPoint;
+    private bool _jumpedHigher;
 
     #region Object lifecycle
     private void Awake()
@@ -91,10 +93,11 @@ public class EntityMovement2D : MonoBehaviour
         {
             return;
         }
-        
+
         // Saut si au sol
         if (Input.GetKeyDown(KeyCode.Space) && _isOnGround)
         {
+            _jumpedHigher = _highestPoint.position.y <= transform.position.y;
             DoJump();
         }
 
@@ -179,11 +182,21 @@ public class EntityMovement2D : MonoBehaviour
     #endregion
 
     #region Collision Callbacks
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 6 && _jumpedHigher)
+        {
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.MEGA_JUMP);
+        }
+        
+	}
+
+	private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Death") && _respawnable != null)
         {
-            _sc.ShakyCameCustom(0.15f,0.3f);
+            _sc.ShakyCameCustom(0.15f, 0.3f);
             _deathPart.gameObject.transform.position = new Vector3(transform.position.x, -5, 0);
             _deathPart.Play();
             Invoke("Respawn", 0.3f);
