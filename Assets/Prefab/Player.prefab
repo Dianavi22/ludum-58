@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HorizontalMovement
   _horizontalSpeed: 10
-  _jumpHeight: 7
+  _jumpHeight: 10
   _fallingGravityScale: 3.5
   _jumpableLayers:
     serializedVersion: 2
