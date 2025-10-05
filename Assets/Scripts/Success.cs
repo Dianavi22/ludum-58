@@ -21,13 +21,13 @@ public class Success : MonoBehaviour
         _mySprite = GetComponentInChildren<SpriteRenderer>();
         _mySprite.sprite = sprite;
 
-        float spriteWidth = _mySprite.sprite.rect.width / _mySprite.sprite.pixelsPerUnit;
-        float spriteHeight = _mySprite.sprite.rect.height / _mySprite.sprite.pixelsPerUnit;
+        //float spriteWidth = _mySprite.sprite.rect.width / _mySprite.sprite.pixelsPerUnit;
+        //float spriteHeight = _mySprite.sprite.rect.height / _mySprite.sprite.pixelsPerUnit;
 
-        float scaleX = targetWidth / spriteWidth;
-        float scaleY = targetHeight / spriteHeight;
+        //float scaleX = targetWidth / spriteWidth;
+        //float scaleY = targetHeight / spriteHeight;
 
-        _mySprite.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+        //_mySprite.transform.localScale = new Vector3(scaleX, scaleY, 1f);
 
         _titleText.text = name;
         _descriptionText.text = description;

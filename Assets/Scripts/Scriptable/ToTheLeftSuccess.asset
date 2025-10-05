@@ -15,7 +15,7 @@ MonoBehaviour:
   isSuccess: 0
   successName: Ultimate contrarian
   successDescription: There is no going back!
-  successSprite: {fileID: 21300000, guid: 9be6490dca7027f4da0d030e13549562, type: 3}
+  successSprite: {fileID: 21300000, guid: 4a03738e3bde0534e8385fd0be279dce, type: 3}
   successKey: TO_THE_LEFT
   showText: 1
   showImage: 0

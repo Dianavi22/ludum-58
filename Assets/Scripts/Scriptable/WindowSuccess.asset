@@ -15,7 +15,7 @@ MonoBehaviour:
   isSuccess: 0
   successName: Small is justice
   successDescription: Size does not matter.... but taste does!
-  successSprite: {fileID: 398339029, guid: 19ee6568157c28d4cbfdbc97b3d007b0, type: 3}
+  successSprite: {fileID: 21300000, guid: 37ba46911bb0ac4429fd9e9405d4f0fc, type: 3}
   successKey: WINDOW_SUCCESS
   showText: 0
   showImage: 1

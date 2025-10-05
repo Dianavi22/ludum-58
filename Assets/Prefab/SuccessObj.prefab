@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 915231107675279117}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.657, z: 0}
-  m_LocalScale: {x: 1.4529082, y: 1.4529082, z: 1.4529082}
+  m_LocalPosition: {x: 0, y: 0.92, z: 0}
+  m_LocalScale: {x: 2.633574, y: 2.633574, z: 2.633574}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2867750065336520475}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 18
-  m_Sprite: {fileID: 7482667652216324306, guid: 7fde9e793a391af4f9495c9bd8296d49, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4c04b9c052c6c4a49bbd87cd57b540a2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,14 +111,14 @@ RectTransform:
   m_GameObject: {fileID: 2272366894402570435}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5608, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2867750065336520475}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1.345}
+  m_AnchoredPosition: {x: 0, y: -1.191}
   m_SizeDelta: {x: 2, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &3225373782282710550
@@ -212,8 +212,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 2.5
-  m_fontSizeBase: 2.5
+  m_fontSize: 2
+  m_fontSizeBase: 2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -309,12 +309,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c5eacf064cf2b4295e66f3904ad0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  SuccessDatas: {fileID: 11400000, guid: 5f1f5ccdf37067243ba817948362e44e, type: 2}
+  SuccessDatas: {fileID: 11400000, guid: 199993ba657db71498357783b17135df, type: 2}
   targetWidth: 1
   targetHeight: 1
   _titleText: {fileID: 6793303511516432865}
   _descriptionText: {fileID: 2155131174055860569}
-  _unknownSprite: {fileID: 7482667652216324306, guid: 7fde9e793a391af4f9495c9bd8296d49, type: 3}
+  _unknownSprite: {fileID: 21300000, guid: 4c04b9c052c6c4a49bbd87cd57b540a2, type: 3}
 --- !u!114 &6711373751985807061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,7 +375,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.484}
+  m_AnchoredPosition: {x: 0, y: -0.33}
   m_SizeDelta: {x: 3, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &4853116459240443758

@@ -15,7 +15,7 @@ MonoBehaviour:
   isSuccess: 0
   successName: Old but gold
   successDescription: It's old... but it checks out
-  successSprite: {fileID: 1272011427, guid: 19ee6568157c28d4cbfdbc97b3d007b0, type: 3}
+  successSprite: {fileID: 21300000, guid: 08bfec4cd3ebf6f419e6438115c59b33, type: 3}
   successKey: KONAMI_CODE
   showText: 0
   showImage: 1
