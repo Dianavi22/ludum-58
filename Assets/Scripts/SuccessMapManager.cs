@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Rewards.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class SuccessMapManager : MonoBehaviour
@@ -34,18 +35,60 @@ public class SuccessMapManager : MonoBehaviour
     /// </summary>
     [SerializeField] private UIFader _achievementFader;
 
+    [SerializeField] PostProcessVolume m_Volume;
+    [SerializeField]   Vignette m_Vignette;
+
     private void Start()
     {
         GetAllSuccessState();
         ShowStateSuccess();
-
+        m_Volume.profile.TryGetSettings(out m_Vignette);
         // 9 is the index of quit achievement in [_success]
         if (!PlayerPrefsUtils.TryGetBool(PlayerPrefsData.IS_THE_FIRST_TIME, true) && !_success[9].SuccessDatas.isSuccess)
         {
             LaunchSuccessAnim(PlayerPrefsData.HAS_QUIT_THE_GAME);
         }
     }
+    private Coroutine vignetteCoroutine;
 
+    public void FadeInVignette(float duration = 0.3f, float targetIntensity = 0.45f)
+    {
+        if (m_Vignette != null)
+        {
+            StartVignetteLerp(targetIntensity, duration);
+        }
+    }
+
+    public void FadeOutVignette(float duration = 0.3f)
+    {
+        if (m_Vignette != null)
+        {
+            StartVignetteLerp(0f, duration);
+        }
+    }
+
+    private void StartVignetteLerp(float target, float duration)
+    {
+        if (vignetteCoroutine != null)
+            StopCoroutine(vignetteCoroutine);
+
+        vignetteCoroutine = StartCoroutine(LerpVignette(target, duration));
+    }
+
+    private IEnumerator LerpVignette(float target, float duration)
+    {
+        float start = m_Vignette.intensity.value;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            m_Vignette.intensity.value = Mathf.Lerp(start, target, time / duration);
+            yield return null;
+        }
+
+        m_Vignette.intensity.value = target;
+    }
     private void OnDestroy()
     {
         PlayerPrefsUtils.SetBool(PlayerPrefsData.HAS_QUIT_THE_GAME, true);
@@ -59,7 +102,7 @@ public class SuccessMapManager : MonoBehaviour
     public void LaunchSuccessAnim(string key)
     {
         _successPanel.SetActive(true);
-
+        FadeInVignette();
         for (int i = 0; i < _success.Count; i++)
         {
             if (_success[i].SuccessDatas.successKey == key)
@@ -111,8 +154,9 @@ public class SuccessMapManager : MonoBehaviour
         {
             isFading = false;
             _achievementFader.FadeOut(_fadout, () => _successPanel.SetActive(false));
+           FadeOutVignette();
             ClearSuccessPanel();
-            
+
 
         }
 
@@ -123,7 +167,7 @@ public class SuccessMapManager : MonoBehaviour
         }
     }
 
-    
+
     private void ShowStateSuccess()
     {
         CheckAllSuccess();
