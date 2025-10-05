@@ -38,11 +38,22 @@ public class SuccessMapManager : MonoBehaviour
     {
         GetAllSuccessState();
         ShowStateSuccess();
+
+        // 9 is the index of quit achievement in [_success]
+        if (!PlayerPrefsUtils.TryGetBool(PlayerPrefsData.IS_THE_FIRST_TIME, true) && !_success[9].SuccessDatas.isSuccess)
+        {
+            LaunchSuccessAnim(PlayerPrefsData.HAS_QUIT_THE_GAME);
+        }
     }
 
     private void OnDestroy()
     {
         PlayerPrefsUtils.SetBool(PlayerPrefsData.HAS_QUIT_THE_GAME, true);
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_THE_FIRST_TIME, false);
     }
 
     public void LaunchSuccessAnim(string key)

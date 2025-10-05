@@ -30,7 +30,7 @@ public class UIFader : MonoBehaviour
             float alpha = Mathf.Lerp(start, stop, Easing.InSine(k));
             SetAlpha(alpha);
             yield return null;
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
         }
 
         SetAlpha(stop);

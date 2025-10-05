@@ -19,7 +19,7 @@ public class PlayerPrefsData
     public const string WINDOW_SUCCESS = "WINDOW_SUCCESS";
     public const string DEATH_SUCCESS = "DEATH_SUCCESS";
 
-    
+
 
     // Other
 

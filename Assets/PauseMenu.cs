@@ -47,7 +47,7 @@ public class PauseMenu : MonoBehaviour
         IsPause = false;
         _pauseMenu.SetActive(false);
         Time.timeScale = 1;
-        if(_ppc.SliderValue == 69)
+        if (_ppc.Volume == 69)
         {
             _succesMapManager.LaunchSuccessAnim(PlayerPrefsData.MAGIC_NUMBER);
         }
