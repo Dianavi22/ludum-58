@@ -180,6 +180,7 @@ public class EntityMovement2D : MonoBehaviour
         if (collision.CompareTag("Death") && _respawnable != null)
         {
             _sc.ShakyCameCustom(0.15f,0.3f);
+            _deathPart.gameObject.transform.position = new Vector3(transform.position.x, -5, 0);
             _deathPart.Play();
             Invoke("Respawn", 0.3f);
             _successMapManager.LaunchSuccessAnim(PlayerPrefsData.DEATH_SUCCESS);
