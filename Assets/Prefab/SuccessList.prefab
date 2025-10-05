@@ -449,7 +449,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3937687653708445315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,7 +668,7 @@ PrefabInstance:
     - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: SuccessDatas
       value: 
-      objectReference: {fileID: 11400000, guid: 199993ba657db71498357783b17135df, type: 2}
+      objectReference: {fileID: 11400000, guid: 3e06984c31254b243a246907888c4d52, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

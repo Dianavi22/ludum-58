@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: KnockKnockKnockSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
   isSuccess: 0
-  successName: KNOCK KNOCK KNOCK!!!
-  successDescription: LET ME IIIIIIN!!!
+  successName: LET ME IIIIIIN!!!
+  successDescription: Knock knock....! Who's there?
   successSprite: {fileID: 21300000, guid: fd9abba7949327e4983d2a3639484efe, type: 3}
   successKey: KNOCK_KNOCK_KNOCK
   showText: 1
