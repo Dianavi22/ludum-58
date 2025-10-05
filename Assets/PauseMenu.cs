@@ -27,7 +27,7 @@ public class PauseMenu : MonoBehaviour
     void Update()
     {
 
-        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !SuccessMapManager.isFading && !IsMainMenu)
+        if ((Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P)) && !SuccessMapManager.IsFading && !IsMainMenu)
         {
             if (IsPause) { Resume(); } else { PausePlz(); }
         }
@@ -55,7 +55,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        if (SuccessMapManager.isFading) { return; }
+        if (SuccessMapManager.IsFading) { return; }
         Resume();
         IsMainMenu = true;
         _mainMenu.SetActive(true);

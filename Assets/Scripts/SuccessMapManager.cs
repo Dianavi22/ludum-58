@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Rewards.Utils;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
 
 public class SuccessMapManager : MonoBehaviour
@@ -20,7 +22,7 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] GameObject _successPanel;
     [SerializeField] PauseMenu _pauseMenu;
 
-    public static bool isFading { get; private set; } = false;
+    public static bool IsFading { get; private set; } = false;
     [SerializeField] float _fadeDuration;
     [SerializeField] float _fadout;
 
@@ -34,18 +36,61 @@ public class SuccessMapManager : MonoBehaviour
     /// </summary>
     [SerializeField] private UIFader _achievementFader;
 
+    [SerializeField] PostProcessVolume m_Volume;
+    [SerializeField] Vignette m_Vignette;
+    [SerializeField] List<Animator> _successAnimators;
+
     private void Start()
     {
+        _achievementFader.FadeOut(0);
         GetAllSuccessState();
         ShowStateSuccess();
-
-        // 9 is the index of quit achievement in [_success]
-        if (!PlayerPrefsUtils.TryGetBool(PlayerPrefsData.IS_THE_FIRST_TIME, true) && !_success[9].SuccessDatas.isSuccess)
+        m_Volume.profile.TryGetSettings(out m_Vignette);
+        if (!PlayerPrefsUtils.TryGetBool(PlayerPrefsData.IS_THE_FIRST_TIME, true) && !_success.First(success => success.SuccessDatas.successKey == PlayerPrefsData.HAS_QUIT_THE_GAME).SuccessDatas.isSuccess)
         {
             LaunchSuccessAnim(PlayerPrefsData.HAS_QUIT_THE_GAME);
         }
     }
+    private Coroutine vignetteCoroutine;
 
+    public void FadeInVignette(float duration = 0.3f, float targetIntensity = 0.45f)
+    {
+        if (m_Vignette != null)
+        {
+            StartVignetteLerp(targetIntensity, duration);
+        }
+    }
+
+    public void FadeOutVignette(float duration = 0.3f)
+    {
+        if (m_Vignette != null)
+        {
+            StartVignetteLerp(0f, duration);
+        }
+    }
+
+    private void StartVignetteLerp(float target, float duration)
+    {
+        if (vignetteCoroutine != null)
+            StopCoroutine(vignetteCoroutine);
+
+        vignetteCoroutine = StartCoroutine(LerpVignette(target, duration));
+    }
+
+    private IEnumerator LerpVignette(float target, float duration)
+    {
+        float start = m_Vignette.intensity.value;
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime;
+            m_Vignette.intensity.value = Mathf.Lerp(start, target, time / duration);
+            yield return null;
+        }
+
+        m_Vignette.intensity.value = target;
+    }
     private void OnDestroy()
     {
         PlayerPrefsUtils.SetBool(PlayerPrefsData.HAS_QUIT_THE_GAME, true);
@@ -58,44 +103,35 @@ public class SuccessMapManager : MonoBehaviour
 
     public void LaunchSuccessAnim(string key)
     {
-        _successPanel.SetActive(true);
+        Success success = _success.First(sucess => sucess.SuccessDatas.successKey == key);
 
-        for (int i = 0; i < _success.Count; i++)
+        if (success == null)
         {
-            if (_success[i].SuccessDatas.successKey == key)
-            {
-                _iconSuccessAnim.sprite = _success[i].SuccessDatas.successSprite;
-                _titleSuccessAnim.text = _success[i].SuccessDatas.successName;
-                _descriptionSuccessAnim.text = _success[i].SuccessDatas.successDescription;
-            }
+            return;
         }
+
+        _iconSuccessAnim.sprite = success.SuccessDatas.successSprite;
+        _titleSuccessAnim.text = success.SuccessDatas.successName;
+        _descriptionSuccessAnim.text = success.SuccessDatas.successDescription;
+
         if (PlayerPrefsUtils.TryGetBool(key))
         {
             return;
         }
+
         PlayerPrefsUtils.SetBool(key, true);
         GetAllSuccessState();
         ShowStateSuccess();
-        try { }
-        catch
-        {
-            return;
-        }
-        isFading = true;
+
+        IsFading = true;
         _achievementFader.FadeIn(_fadeDuration);
+        FadeInVignette();
+        _successAnimators.ForEach(animator => animator.SetBool("IsVisible", true));
     }
 
     public void GetAllSuccessState()
     {
-        for (int i = 0; i < _success.Count; i++)
-        {
-            _success[i].SuccessDatas.isSuccess = PlayerPrefsUtils.TryGetBool(_success[i].SuccessDatas.successKey);
-            if (_success[i].SuccessDatas.isSuccess)
-            {
-                _button.SetActive(true);
-            }
-        }
-
+        _button.SetActive(_success.Any(success => PlayerPrefsUtils.TryGetBool(success.SuccessDatas.successKey)));
     }
 
     private void ClearSuccessPanel()
@@ -107,13 +143,15 @@ public class SuccessMapManager : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetMouseButtonDown(0) && _successPanel.activeSelf)
+        if (Input.GetMouseButtonDown(0) && _achievementFader.isFadeIn)
         {
-            isFading = false;
-            _achievementFader.FadeOut(_fadout, () => _successPanel.SetActive(false));
-            ClearSuccessPanel();
-            
-
+            _achievementFader.FadeOut(_fadout, () =>
+            {
+                IsFading = false;
+                ClearSuccessPanel();
+                _successAnimators.ForEach(animator => animator.SetBool("IsVisible", false));
+                FadeOutVignette();
+            });
         }
 
 
@@ -123,42 +161,34 @@ public class SuccessMapManager : MonoBehaviour
         }
     }
 
-    
+
     private void ShowStateSuccess()
     {
         CheckAllSuccess();
-        for (int i = 0; i < _success.Count; i++)
+        foreach (Success success in _success)
         {
-            if (_success[i].SuccessDatas.isSuccess)
+            if (success.SuccessDatas.isSuccess)
             {
-                _success[i].ShowAllSuccess();
+                success.ShowAllSuccess();
             }
 
-            else if (_success[i].SuccessDatas.showImage)
+            else if (success.SuccessDatas.showImage)
             {
-                _success[i].ShowOnlySprite();
+                success.ShowOnlySprite();
             }
 
-            else if (_success[i].SuccessDatas.showText)
+            else if (success.SuccessDatas.showText)
             {
-                _success[i].ShowOnlyName();
+                success.ShowOnlyName();
             }
         }
     }
 
     private void CheckAllSuccess()
     {
-        int id = 0;
-        for (int i = 0; i < _success.Count; i++)
-        {
+        bool all = _success.All(success => success.SuccessDatas.isSuccess);
 
-            if (_success[i].SuccessDatas.isSuccess)
-            {
-                id++;
-            }
-        }
-
-        if (id == _success.Count)
+        if (all)
         {
             print("ALL SUCCESS");
         }
@@ -166,7 +196,7 @@ public class SuccessMapManager : MonoBehaviour
 
     public void ShowSuccessMap()
     {
-        if (SuccessMapManager.isFading || PauseMenu.IsPause || PauseMenu.IsMainMenu) { return; }
+        if (IsFading || PauseMenu.IsPause || PauseMenu.IsMainMenu) { return; }
         LaunchSuccessAnim(PlayerPrefsData.PAUSE_MENU);
         _map.SetActive(!_map.activeSelf);
     }

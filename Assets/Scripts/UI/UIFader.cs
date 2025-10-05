@@ -9,6 +9,9 @@ public class UIFader : MonoBehaviour
 {
     List<CanvasRenderer> _renderers = new();
 
+    private float _alphaValue;
+    public bool isFadeIn => _alphaValue == 1;
+
     private void Awake()
     {
         _renderers = GetComponentsInChildren<CanvasRenderer>().ToList();
@@ -17,6 +20,7 @@ public class UIFader : MonoBehaviour
     private void SetAlpha(float value)
     {
         _renderers.ForEach((e) => e.SetAlpha(value));
+        _alphaValue = value;
     }
 
     private IEnumerator FadeCoroutine(float duration, float stop, Action then)
