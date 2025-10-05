@@ -317,6 +317,7 @@ MonoBehaviour:
   _titleText: {fileID: 6793303511516432865}
   _descriptionText: {fileID: 2155131174055860569}
   _unknownSprite: {fileID: 21300000, guid: 4c04b9c052c6c4a49bbd87cd57b540a2, type: 3}
+  _particle: {fileID: 9147449291462315029}
 --- !u!114 &6711373751985807061
 MonoBehaviour:
   m_ObjectHideFlags: 0

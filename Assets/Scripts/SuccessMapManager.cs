@@ -93,12 +93,12 @@ public class SuccessMapManager : MonoBehaviour
 
         m_Vignette.intensity.value = target;
     }
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     private void OnDestroy()
     {
         PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, true);
     }
-    #endif
+#endif
 
     private void OnApplicationQuit()
     {
@@ -147,8 +147,9 @@ public class SuccessMapManager : MonoBehaviour
         bool any = false;
         foreach (Success success in _success)
         {
-            success.SuccessDatas.isSuccess = PlayerPrefsUtils.TryGetBool(success.SuccessDatas.successKey);
-            any |= success.SuccessDatas.isSuccess;
+            bool isSuccess = PlayerPrefsUtils.TryGetBool(success.SuccessDatas.successKey);
+            success.SuccessDatas.isSuccess = isSuccess;
+            any |= isSuccess;
         }
 
         _button.SetActive(any);
@@ -169,7 +170,7 @@ public class SuccessMapManager : MonoBehaviour
             {
                 IsFading = false;
                 ClearSuccessPanel();
-                _successAnimators.ForEach(animator => animator.SetBool("IsVisible", false) );
+                _successAnimators.ForEach(animator => animator.SetBool("IsVisible", false));
                 FadeOutVignette();
                 _glowSuccessPart.gameObject.SetActive(false);
 
