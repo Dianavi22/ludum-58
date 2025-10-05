@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using Rewards.Utils;
 using UnityEngine;
 using UnityEngine.Events;
@@ -33,6 +34,10 @@ public class EntityMovement2D : MonoBehaviour
     [SerializeField, Range(0f, 5f)] private float _velocityGravityTreshhold;
     [SerializeField] SuccessMapManager _successMapManager;
 
+    [SerializeField] ParticleSystem _walkPart;
+    [SerializeField] ParticleSystem _hitFloorPart;
+    [SerializeField] ParticleSystem _deathPart;
+    [SerializeField] ShakyCam _sc;
     /// <summary>
     /// The box collider used to check if the player is grounded.
     /// </summary>
@@ -83,9 +88,11 @@ public class EntityMovement2D : MonoBehaviour
         _baseGravityScale = _rigidbody.gravityScale;
     }
 
+    private bool _wasOnGround;
+
     private void Update()
     {
-        // Doing a jump if on the ground.
+        // Saut si au sol
         if (Input.GetAxisRaw("Jump") == 1 && _isOnGround)
         {
             DoJump();
@@ -95,7 +102,6 @@ public class EntityMovement2D : MonoBehaviour
         {
             _isFalling = _rigidbody.velocity.y <= _velocityGravityTreshhold;
 
-            // Updating the gravity and the gravity scale when falling.
             if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
             {
                 _rigidbody.gravityScale = _fallingGravityScale;
@@ -105,16 +111,24 @@ public class EntityMovement2D : MonoBehaviour
         {
             _isFalling = false;
 
-            // Reverting the changes from gravity and scale when back on the ground.
             if (_rigidbody.gravityScale != _baseGravityScale)
             {
                 _rigidbody.gravityScale = _baseGravityScale;
             }
+
+            if (!_wasOnGround)
+            {
+                _hitFloorPart.Play();
+            }
         }
+
+        _wasOnGround = _isOnGround;
     }
+
 
     [SerializeField] private float idleTimeMax ; 
     private float idleTimer = 0f;
+    private bool _isWalking = false;
 
     private void FixedUpdate()
     {
@@ -124,7 +138,7 @@ public class EntityMovement2D : MonoBehaviour
         _isOnGround = 0 < Physics2D.OverlapAreaAll(_groundChecker.bounds.min, _groundChecker.bounds.max, _jumpableLayers).Length;
         
         float xInput = Input.GetAxis("Horizontal");
-        bool hasInput = Mathf.Abs(xInput) > 0.01f || Input.anyKey;
+        bool hasInput = Mathf.Abs(xInput) > 0.01f;
 
         if (hasInput)
         {
@@ -133,21 +147,28 @@ public class EntityMovement2D : MonoBehaviour
             if (Mathf.Abs(xInput) > 0.01f)
             {
                 _rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
+
+                if (_isOnGround && !_walkPart.isPlaying)
+                    _walkPart.Play();
             }
 
             if (_isOnGround && xInput == 0)
             {
                 _rigidbody.velocity *= _friction;
+                _walkPart.Stop();
             }
         }
         else
         {
             idleTimer += Time.fixedDeltaTime;
 
+            if (_walkPart.isPlaying)
+                _walkPart.Stop();
+
             if (idleTimer >= idleTimeMax)
             {
                 _successMapManager.LaunchSuccessAnim(PlayerPrefsData.AFK_SUCCESS);
-                idleTimer = 0f; 
+                idleTimer = 0f;
             }
         }
     }
@@ -159,9 +180,16 @@ public class EntityMovement2D : MonoBehaviour
     {
         if (collision.CompareTag("Death") && _respawnable != null)
         {
-            _respawnable.Respawn();
+            _sc.ShakyCameCustom(0.15f,0.3f);
+            _deathPart.Play();
+            Invoke("Respawn", 0.3f);
             _successMapManager.LaunchSuccessAnim(PlayerPrefsData.DEATH_SUCCESS);
         }
+    }
+
+    private void Respawn()
+    {
+        _respawnable.Respawn();
     }
     #endregion
 
