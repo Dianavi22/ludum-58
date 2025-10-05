@@ -782,6 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb0b5907f1cdb741bf865f73739c594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  successMapManager: {fileID: 0}
   _slider: {fileID: 8412750623343034617}
   _muteButtonSwapper: {fileID: 1743599973553293847}
   _volumeBarTMP: {fileID: 7357283229592703076}
@@ -1287,8 +1288,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 773327372c424cf43ae6ea7fb3e41a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultSprite: {fileID: 21300000, guid: 781c28e8b8e4d3d48bb154cc9d7500c5, type: 3}
-  _secondarySprite: {fileID: 21300000, guid: 6b872f00a178b3346a62937a83e1090f, type: 3}
+  _defaultSprite: {fileID: 21300000, guid: 6bec73ef7d813f84dae65b6c71bd01cf, type: 3}
+  _secondarySprite: {fileID: 21300000, guid: 636666e040530b84b909769d5ce20238, type: 3}
 --- !u!1 &7846512316303318461
 GameObject:
   m_ObjectHideFlags: 0
