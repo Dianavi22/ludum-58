@@ -31,7 +31,7 @@ public class EntityMovement2D : MonoBehaviour
     /// </summary>
     [SerializeField, Range(0f, 1f), Tooltip("Drag to be applied each frame when grounded.")] private float _friction;
 
-    [SerializeField, Range(0f, 5f)] private float _velocityGravityTreshhold;
+    [SerializeField] private float _velocityGravityTreshhold;
     [SerializeField] SuccessMapManager _successMapManager;
 
     [SerializeField] ParticleSystem _walkPart;
@@ -65,12 +65,7 @@ public class EntityMovement2D : MonoBehaviour
 
     private Respawnable _respawnable;
     private BoxCollider2D _collider;
-
-    /// <summary>
-    /// Event raised when this entity jumps.
-    /// </summary>
-    private readonly UnityEvent _jumpEvent = new();
-    public UnityEvent JumpEvent => _jumpEvent;
+    private int _jumpCounter;
 
     #region Object lifecycle
     private void Awake()
@@ -102,9 +97,9 @@ public class EntityMovement2D : MonoBehaviour
         {
             _isFalling = _rigidbody.velocity.y <= _velocityGravityTreshhold;
 
-            if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
+            if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale * 2)
             {
-                _rigidbody.gravityScale = _fallingGravityScale;
+                _rigidbody.gravityScale = _fallingGravityScale * 2;
             }
         }
         else
@@ -198,8 +193,15 @@ public class EntityMovement2D : MonoBehaviour
     /// </summary>
     private void DoJump()
     {
+        _rigidbody.gravityScale = _fallingGravityScale;
+        idleTimer = 0f;
         _isOnGround = false;
-        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpHeight);
-        _jumpEvent.Invoke();
+        _rigidbody.AddForce(Vector2.up * _jumpHeight, ForceMode2D.Impulse);
+        _jumpCounter++;
+
+        if (_jumpCounter == 50)
+        {
+            _successMapManager.LaunchSuccessAnim(PlayerPrefsData.JUMPING_SUCCESS);
+        }
     }
 }
