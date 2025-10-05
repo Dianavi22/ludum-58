@@ -17,5 +17,5 @@ MonoBehaviour:
   successDescription: Don't you dare pressing it!
   successSprite: {fileID: 21300000, guid: 55a0d6d121e013d4d87e880e76548b8b, type: 3}
   successKey: BUTTON_SUCCESS
-  showText: 0
+  showText: 1
   showImage: 0

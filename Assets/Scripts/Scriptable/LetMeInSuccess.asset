@@ -18,4 +18,4 @@ MonoBehaviour:
   successSprite: {fileID: 21300000, guid: e2be129682f9ede4583c3656ee4ee41c, type: 3}
   successKey: KNOCK_SUCCESS
   showText: 0
-  showImage: 0
+  showImage: 1

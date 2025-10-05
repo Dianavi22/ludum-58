@@ -106,6 +106,10 @@ public class EntityMovement2D : MonoBehaviour
             {
                 _rigidbody.gravityScale = _fallingGravityScale * 2;
             }
+            else if (!_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
+            {
+                _rigidbody.gravityScale = _fallingGravityScale;
+            }
         }
         else
         {

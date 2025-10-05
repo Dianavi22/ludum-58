@@ -11,8 +11,6 @@ public class Door : MonoBehaviour, IInteractable
         if (SuccessMapManager.IsFading || PauseMenu.IsPause) { return; }
 
         _knockCounter++;
-
-        print(_knockCounter);
         
         if (1 == _knockCounter)
         {

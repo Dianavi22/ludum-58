@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b5966c72b098e4fbf648831609382f, type: 3}
   m_Name: DeathSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
-  isSuccess: 1
-  successName: Death
+  isSuccess: 0
+  successName: YOU DIED
   successDescription: Looks like skill issue
   successSprite: {fileID: 21300000, guid: 847d468070904bc4f9ba6883c229bd97, type: 3}
   successKey: DEATH_SUCCESS

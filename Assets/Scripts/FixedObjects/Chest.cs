@@ -6,7 +6,6 @@ public class Chest : MonoBehaviour, IInteractable
 
 	public void Interact()
     {
-        print("AAAAAAAAA");
         _success.LaunchSuccessAnim(PlayerPrefsData.CHEST_SUCCESS);
     }
 }
