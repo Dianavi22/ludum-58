@@ -17,5 +17,5 @@ MonoBehaviour:
   successDescription: This door does not open from this side
   successSprite: {fileID: 21300000, guid: e2be129682f9ede4583c3656ee4ee41c, type: 3}
   successKey: KNOCK_SUCCESS
-  showText: 1
+  showText: 0
   showImage: 0

@@ -52,5 +52,10 @@ namespace Rewards.Utils
             SetInt(key, 1);
             return boolVar;
         }
+
+        public static bool GetBool(string key)
+        {
+            return HasKey(key) && GetInt(key) == 0;
+        }
     }
 }

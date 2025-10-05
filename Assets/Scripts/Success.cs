@@ -47,4 +47,9 @@ public class Success : MonoBehaviour
     {
         ShowSuccess(SuccessDatas.successSprite, "?????", "?????");
     }
+
+    public void ShowNothing()
+    {
+        ShowSuccess(_unknownSprite, "?????", "?????");
+    }
 }

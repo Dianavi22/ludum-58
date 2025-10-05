@@ -17,5 +17,5 @@ MonoBehaviour:
   successDescription: Try shouting TIID KLO UL
   successSprite: {fileID: 21300000, guid: fd69c11dfad8a3a429dd19ba6073eb6c, type: 3}
   successKey: PAUSE_MENU
-  showText: 1
+  showText: 0
   showImage: 0

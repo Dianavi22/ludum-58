@@ -20,7 +20,7 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] GameObject _map;
     [SerializeField] GameObject _button;
     [SerializeField] GameObject _successPanel;
-    [SerializeField] PauseMenu _pauseMenu;
+    [SerializeField] private PauseMenu _pauseMenu;
 
     public static bool IsFading { get; private set; } = false;
     [SerializeField] float _fadeDuration;
@@ -47,12 +47,13 @@ public class SuccessMapManager : MonoBehaviour
         GetAllSuccessState();
         ShowStateSuccess();
         m_Volume.profile.TryGetSettings(out m_Vignette);
-        if (!PlayerPrefsUtils.TryGetBool(PlayerPrefsData.IS_THE_FIRST_TIME, true) && !_success.First(success => success.SuccessDatas.successKey == PlayerPrefsData.HAS_QUIT_THE_GAME).SuccessDatas.isSuccess)
+        if (PlayerPrefsUtils.GetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME) && !_success.Where(success => success.SuccessDatas.successKey == PlayerPrefsData.HAS_QUIT_THE_GAME).Any(success => success.SuccessDatas.isSuccess))
         {
             LaunchSuccessAnim(PlayerPrefsData.HAS_QUIT_THE_GAME);
         }
     }
     private Coroutine vignetteCoroutine;
+
 
     public void FadeInVignette(float duration = 0.3f, float targetIntensity = 0.45f)
     {
@@ -92,14 +93,16 @@ public class SuccessMapManager : MonoBehaviour
 
         m_Vignette.intensity.value = target;
     }
+    #if UNITY_EDITOR
     private void OnDestroy()
     {
-        PlayerPrefsUtils.SetBool(PlayerPrefsData.HAS_QUIT_THE_GAME, true);
+        PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, true);
     }
+    #endif
 
     private void OnApplicationQuit()
     {
-        PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_THE_FIRST_TIME, false);
+        PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, true);
     }
 
     public void LaunchSuccessAnim(string key)
@@ -141,7 +144,14 @@ public class SuccessMapManager : MonoBehaviour
 
     public void GetAllSuccessState()
     {
-        _button.SetActive(_success.Any(success => PlayerPrefsUtils.TryGetBool(success.SuccessDatas.successKey)));
+        bool any = false;
+        foreach (Success success in _success)
+        {
+            success.SuccessDatas.isSuccess = PlayerPrefsUtils.TryGetBool(success.SuccessDatas.successKey);
+            any |= success.SuccessDatas.isSuccess;
+        }
+
+        _button.SetActive(any);
     }
 
     private void ClearSuccessPanel()
@@ -193,6 +203,10 @@ public class SuccessMapManager : MonoBehaviour
             {
                 success.ShowOnlyName();
             }
+            else
+            {
+                success.ShowNothing();
+            }
         }
     }
 
@@ -209,7 +223,7 @@ public class SuccessMapManager : MonoBehaviour
     public void ShowSuccessMap()
     {
         if (IsFading || PauseMenu.IsPause || PauseMenu.IsMainMenu) { return; }
-        LaunchSuccessAnim(PlayerPrefsData.PAUSE_MENU);
+        LaunchSuccessAnim(PlayerPrefsData.OPEN_SUCCESS);
         _map.SetActive(!_map.activeSelf);
     }
 }

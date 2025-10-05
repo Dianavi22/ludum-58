@@ -87,8 +87,13 @@ public class EntityMovement2D : MonoBehaviour
 
     private void Update()
     {
+        if (PauseMenu.IsPause)
+        {
+            return;
+        }
+        
         // Saut si au sol
-        if (Input.GetAxisRaw("Jump") == 1 && _isOnGround)
+        if (Input.GetKeyDown(KeyCode.Space) && _isOnGround)
         {
             DoJump();
         }
