@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0b5966c72b098e4fbf648831609382f, type: 3}
-  m_Name: WindowSuccess
+  m_Name: ButtonSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
   isSuccess: 0
   successName: Small is justice
   successDescription: Size does not matter.... but taste does!
   successSprite: {fileID: 398339029, guid: 19ee6568157c28d4cbfdbc97b3d007b0, type: 3}
-  successKey: WINDOW_SUCCESS
+  successKey: BUTTON_SUCCESS
   showText: 0
   showImage: 1

@@ -18,6 +18,7 @@ public class PlayerPrefsData
     public const string TO_THE_LEFT = "TO_THE_LEFT";
     public const string WINDOW_SUCCESS = "WINDOW_SUCCESS";
     public const string DEATH_SUCCESS = "DEATH_SUCCESS";
+    public const string CHEST_SUCCESS = "CHEST_SUCCESS";
 
 
 

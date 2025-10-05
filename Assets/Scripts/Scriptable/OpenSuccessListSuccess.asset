@@ -15,7 +15,7 @@ MonoBehaviour:
   isSuccess: 0
   successName: I can read!
   successDescription: This sign will stop me because I can read!
-  successSprite: {fileID: 21300000, guid: 9be6490dca7027f4da0d030e13549562, type: 3}
+  successSprite: {fileID: 192769231, guid: 19ee6568157c28d4cbfdbc97b3d007b0, type: 3}
   successKey: OPEN_SUCCESS
   showText: 1
   showImage: 0
