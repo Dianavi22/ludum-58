@@ -173,7 +173,10 @@ public class SuccessMapManager : MonoBehaviour
                 _successAnimators.ForEach(animator => animator.SetBool("IsVisible", false));
                 FadeOutVignette();
                 _glowSuccessPart.gameObject.SetActive(false);
-
+                if (CheckAllSuccess())
+                {
+                    Invoke("TriggerEnding", 0.5f);
+                }
             });
         }
 
@@ -184,6 +187,10 @@ public class SuccessMapManager : MonoBehaviour
         }
     }
 
+    private void TriggerEnding()
+    {
+        LaunchSuccessAnim(PlayerPrefsData.FINAL_SUCCESS);
+    }
 
     private void ShowStateSuccess()
     {
@@ -211,14 +218,9 @@ public class SuccessMapManager : MonoBehaviour
         }
     }
 
-    private void CheckAllSuccess()
+    private bool CheckAllSuccess()
     {
-        bool all = _success.All(success => success.SuccessDatas.isSuccess);
-
-        if (all)
-        {
-            print("ALL SUCCESS");
-        }
+        return _success.Except(_success.Where(success => success.SuccessDatas.successKey == PlayerPrefsData.FINAL_SUCCESS)).All(success => success.SuccessDatas.isSuccess);
     }
 
     public void ShowSuccessMap()

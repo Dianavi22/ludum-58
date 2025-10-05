@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b5966c72b098e4fbf648831609382f, type: 3}
   m_Name: KnockKnockKnockSuccess
   m_EditorClassIdentifier: Assembly-CSharp::SuccessData
-  isSuccess: 0
+  isSuccess: 1
   successName: LET ME IIIIIIN!!!
-  successDescription: Knock knock....! Who's there?
+  successDescription: This door does not open from this side
   successSprite: {fileID: 21300000, guid: fd9abba7949327e4983d2a3639484efe, type: 3}
   successKey: KNOCK_KNOCK_KNOCK
   showText: 1

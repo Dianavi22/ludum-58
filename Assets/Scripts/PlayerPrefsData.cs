@@ -19,6 +19,9 @@ public class PlayerPrefsData
     public const string WINDOW_SUCCESS = "WINDOW_SUCCESS";
     public const string DEATH_SUCCESS = "DEATH_SUCCESS";
     public const string CHEST_SUCCESS = "CHEST_SUCCESS";
+    public const string GOOSE_SUCCESS = "GOOSE_SUCCESS";
+    public const string BUTTON_SUCCESS = "BUTTON_SUCCESS";
+    public const string FINAL_SUCCESS = "FINAL_SUCCESS";
 
 
 

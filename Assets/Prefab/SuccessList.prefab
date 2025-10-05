@@ -1733,6 +1733,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Unknow
       objectReference: {fileID: 0}
+    - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: SuccessDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: c7d0bc834a356644fb94bbfc4743ddc6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
