@@ -35,7 +35,7 @@ public class Interacter : MonoBehaviour
         // On interact: gets all interactable in range and interact with the closest one.
         if (Input.GetKeyDown(_keycode))
         {
-            _animator.SetBool("interact", true);
+            _animator.SetTrigger("interact");
 
             IInteractable nearestInteractable = null;
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _interactionRange);

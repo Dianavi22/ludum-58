@@ -109,12 +109,12 @@ public class EntityMovement2D : MonoBehaviour
 
             if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale * 2)
             {
+                _animator.SetBool("jumping", false);
+                _animator.SetBool("falling", true);
                 _rigidbody.gravityScale = _fallingGravityScale * 2;
             }
             else if (!_isFalling && _rigidbody.gravityScale != _fallingGravityScale)
             {
-                _animator.SetBool("jumping", false);
-                _animator.SetBool("falling", true);
                 _rigidbody.gravityScale = _fallingGravityScale;
             }
         }
