@@ -128,7 +128,6 @@ public class EntityMovement2D : MonoBehaviour
 
     [SerializeField] private float idleTimeMax ; 
     private float idleTimer = 0f;
-    private bool _isWalking = false;
 
     private void FixedUpdate()
     {

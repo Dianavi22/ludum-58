@@ -37,7 +37,8 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] private UIFader _achievementFader;
 
     [SerializeField] PostProcessVolume m_Volume;
-    [SerializeField]   Vignette m_Vignette;
+    [SerializeField] Vignette m_Vignette;
+    [SerializeField] List<Animator> _successAnimators;
 
     private void Start()
     {
@@ -45,8 +46,7 @@ public class SuccessMapManager : MonoBehaviour
         GetAllSuccessState();
         ShowStateSuccess();
         m_Volume.profile.TryGetSettings(out m_Vignette);
-        // 9 is the index of quit achievement in [_success]
-        if (!PlayerPrefsUtils.TryGetBool(PlayerPrefsData.IS_THE_FIRST_TIME, true) && !_success[9].SuccessDatas.isSuccess)
+        if (!PlayerPrefsUtils.TryGetBool(PlayerPrefsData.IS_THE_FIRST_TIME, true) && !_success.First(success => success.SuccessDatas.successKey == PlayerPrefsData.HAS_QUIT_THE_GAME).SuccessDatas.isSuccess)
         {
             LaunchSuccessAnim(PlayerPrefsData.HAS_QUIT_THE_GAME);
         }
@@ -84,7 +84,7 @@ public class SuccessMapManager : MonoBehaviour
 
         while (time < duration)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
             m_Vignette.intensity.value = Mathf.Lerp(start, target, time / duration);
             yield return null;
         }
@@ -103,9 +103,9 @@ public class SuccessMapManager : MonoBehaviour
 
     public void LaunchSuccessAnim(string key)
     {
-        _successPanel.SetActive(true);
-        FadeInVignette();
-        for (int i = 0; i < _success.Count; i++)
+        Success success = _success.First(sucess => sucess.SuccessDatas.successKey == key);
+
+        if (success == null)
         {
             return;
         }
@@ -125,6 +125,8 @@ public class SuccessMapManager : MonoBehaviour
 
         IsFading = true;
         _achievementFader.FadeIn(_fadeDuration);
+        FadeInVignette();
+        _successAnimators.ForEach(animator => animator.SetBool("IsVisible", true));
     }
 
     public void GetAllSuccessState()
@@ -143,12 +145,13 @@ public class SuccessMapManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && _achievementFader.isFadeIn)
         {
-            isFading = false;
-            _achievementFader.FadeOut(_fadout, () => _successPanel.SetActive(false));
-           FadeOutVignette();
-            ClearSuccessPanel();
-
-
+            _achievementFader.FadeOut(_fadout, () =>
+            {
+                IsFading = false;
+                ClearSuccessPanel();
+                _successAnimators.ForEach(animator => animator.SetBool("IsVisible", false));
+                FadeOutVignette();
+            });
         }
 
 
