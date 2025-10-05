@@ -355,7 +355,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 7482667652216324306, guid: 7fde9e793a391af4f9495c9bd8296d49, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -425,7 +425,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &1746191776563392425
 MonoBehaviour:
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3937687653708445315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -663,7 +663,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5649590590568182224, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: m_Name
-      value: Unknow
+      value: Death
       objectReference: {fileID: 0}
     - target: {fileID: 8749144946388348981, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: SuccessDatas
@@ -687,6 +687,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4278877748641488024}
     m_Modifications:
+    - target: {fileID: 1178531091311749609, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 71
+      objectReference: {fileID: 0}
     - target: {fileID: 2867750065336520475, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1111,6 +1115,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4278877748641488024}
     m_Modifications:
+    - target: {fileID: 1178531091311749609, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 2867750065336520475, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1199,6 +1207,10 @@ PrefabInstance:
       propertyPath: SuccessDatas
       value: 
       objectReference: {fileID: 11400000, guid: 304afe798da0bb24fa4ebfbf58a8dedb, type: 2}
+    - target: {fileID: 9147449291462315029, guid: b380b3f67f4317c488fa954264fc8a4f, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
