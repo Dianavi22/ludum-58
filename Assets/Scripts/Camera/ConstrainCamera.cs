@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ConstrainCamera : MonoBehaviour
 {
-    [SerializeField] private Transform _bottomLeft;
-    [SerializeField] private Transform _topRight;
     [SerializeField] private Transform _target;
 
     private Rigidbody2D _rigidbody;
