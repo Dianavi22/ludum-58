@@ -15,7 +15,7 @@ MonoBehaviour:
   isSuccess: 0
   successName: Nice *lenny's face*
   successDescription: The funny number
-  successSprite: {fileID: 21300000, guid: aad94ed68686826448e9d103e575c543, type: 3}
+  successSprite: {fileID: -916879699, guid: 19ee6568157c28d4cbfdbc97b3d007b0, type: 3}
   successKey: MAGIC_NUMBER
   showText: 0
   showImage: 1

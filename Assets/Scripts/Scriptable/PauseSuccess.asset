@@ -15,7 +15,7 @@ MonoBehaviour:
   isSuccess: 1
   successName: ZA WARUDO
   successDescription: Try shouting TIID KLO UL
-  successSprite: {fileID: 21300000, guid: f15987e4a88f1d14894f7307df440b05, type: 3}
+  successSprite: {fileID: -326722821, guid: 19ee6568157c28d4cbfdbc97b3d007b0, type: 3}
   successKey: PAUSE_MENU
   showText: 1
   showImage: 0
