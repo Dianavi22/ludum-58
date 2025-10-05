@@ -4997,7 +4997,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -10000,6 +10000,8 @@ MonoBehaviour:
   _hitFloorPart: {fileID: 5536195784047316889}
   _deathPart: {fileID: 0}
   _sc: {fileID: 0}
+  _animator: {fileID: 0}
+  _spriteRenderer: {fileID: 0}
   _groundChecker: {fileID: 3008139285240569052}
   _highestPoint: {fileID: 0}
   idleTimeMax: 30
@@ -10034,6 +10036,7 @@ MonoBehaviour:
     m_Bits: 256
   _debugShowGizmos: 1
   _keycode: 101
+  _animator: {fileID: 0}
 --- !u!114 &1179618914667531602
 MonoBehaviour:
   m_ObjectHideFlags: 0
