@@ -15,7 +15,7 @@ MonoBehaviour:
   isSuccess: 0
   successName: Ow!
   successDescription: Don't break your legs!!
-  successSprite: {fileID: 21300000, guid: 847d468070904bc4f9ba6883c229bd97, type: 3}
+  successSprite: {fileID: 21300000, guid: 05a9664111b43fb4d9ade4510e0d422f, type: 3}
   successKey: MEGA_JUMP
   showText: 0
   showImage: 1

@@ -1,6 +1,5 @@
 using System.Runtime.CompilerServices;
 using Rewards.Utils;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Events;
 
