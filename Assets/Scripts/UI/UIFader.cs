@@ -40,7 +40,14 @@ public class UIFader : MonoBehaviour
 
     public void FadeOut(float duration, Action then = null)
     {
-        StartCoroutine(FadeCoroutine(duration, 0, then));
+        try
+        {
+            StartCoroutine(FadeCoroutine(duration, 0, then));
+        }
+        catch
+        {
+            //
+        }
     }
 
     public void FadeIn(float duration, Action then = null)

@@ -5,12 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [SerializeField] private GameObject _levelSelector;
     [SerializeField] private GameObject _credits;
-    [SerializeField] private GameObject _controls;
     public void PlayGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void OpenCredits()
     {
@@ -21,14 +19,6 @@ public class MainMenuManager : MonoBehaviour
         _credits.SetActive(false);
     }
 
-    public void OpenControls()
-    {
-        _controls.SetActive(true);
-    }
-    public void CloseControls()
-    {
-        _controls.SetActive(false);
-    }
     public void Quit()
     {
         Application.Quit();

@@ -39,7 +39,7 @@ public class MovementAchievements : MonoBehaviour
     {
         _jumpCounter++;
 
-        if (50 == _jumpCounter)
+        if (70 == _jumpCounter)
         {
             PlayerPrefsUtils.SetBool(PlayerPrefsData.JUMPING_SUCCESS, true);
             _successMapManager.GetAllSuccessState();

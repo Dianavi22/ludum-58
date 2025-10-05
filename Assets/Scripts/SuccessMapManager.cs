@@ -17,6 +17,8 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] GameObject _theList;
     [SerializeField] GameObject _map;
     [SerializeField] GameObject _button;
+    [SerializeField] GameObject _successPanel;
+    [SerializeField] PauseMenu _pauseMenu;
 
     public static bool isFading { get; private set; } = false;
     [SerializeField] float _fadeDuration;
@@ -26,6 +28,7 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] TMP_Text _descriptionSuccessAnim;
     [SerializeField] Image _iconSuccessAnim;
 
+    [SerializeField] TypeSentence _typeSentence;
     /// <summary>
     /// Achievement fader to fade in/out the panel on achievement obtained.
     /// </summary>
@@ -33,19 +36,19 @@ public class SuccessMapManager : MonoBehaviour
 
     private void Start()
     {
-        //GetAllSuccessState();
+        GetAllSuccessState();
         ShowStateSuccess();
-        _achievementFader.FadeOut(0);
     }
 
     private void OnDestroy()
     {
         PlayerPrefsUtils.SetBool(PlayerPrefsData.HAS_QUIT_THE_GAME, true);
-        GetAllSuccessState();
     }
 
     public void LaunchSuccessAnim(string key)
     {
+        _successPanel.SetActive(true);
+
         for (int i = 0; i < _success.Count; i++)
         {
             if (_success[i].SuccessDatas.successKey == key)
@@ -61,6 +64,7 @@ public class SuccessMapManager : MonoBehaviour
         }
         PlayerPrefsUtils.SetBool(key, true);
         GetAllSuccessState();
+        ShowStateSuccess();
         try { }
         catch
         {
@@ -83,21 +87,24 @@ public class SuccessMapManager : MonoBehaviour
 
     }
 
-    private void OnMouseDown()
+    private void ClearSuccessPanel()
     {
-
+        _titleSuccessAnim.text = "";
+        _descriptionSuccessAnim.text = "";
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && isFading)
+
+        if (Input.GetMouseButtonDown(0) && _successPanel.activeSelf)
         {
-            _achievementFader.FadeOut(_fadout, () => isFading = false);
+            isFading = false;
+            _achievementFader.FadeOut(_fadout, () => _successPanel.SetActive(false));
+            ClearSuccessPanel();
+            
+
         }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            LaunchSuccessAnim(PlayerPrefsData.TO_THE_LEFT);
-        }
+
 
         if (Input.GetKeyDown(KeyCode.J))
         {
@@ -105,7 +112,7 @@ public class SuccessMapManager : MonoBehaviour
         }
     }
 
-    }
+    
     private void ShowStateSuccess()
     {
         CheckAllSuccess();
@@ -142,14 +149,14 @@ public class SuccessMapManager : MonoBehaviour
 
         if (id == _success.Count)
         {
-            _theKey.SetActive(true);
-            _theList.SetActive(false);
+            print("ALL SUCCESS");
         }
     }
 
     public void ShowSuccessMap()
     {
-        if (SuccessMapManager.isFading || PauseMenu.IsPause) { return; }
+        if (SuccessMapManager.isFading || PauseMenu.IsPause || PauseMenu.IsMainMenu) { return; }
+        LaunchSuccessAnim(PlayerPrefsData.PAUSE_MENU);
         _map.SetActive(!_map.activeSelf);
     }
 }
