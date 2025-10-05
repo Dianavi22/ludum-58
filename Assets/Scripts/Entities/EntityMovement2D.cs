@@ -40,6 +40,8 @@ public class EntityMovement2D : MonoBehaviour
     [SerializeField] ParticleSystem _deathPart;
     [SerializeField] ShakyCam _sc;
     [SerializeField] Animator _animator;
+    [SerializeField] SpriteRenderer _spriteRenderer;
+
     /// <summary>
     /// The box collider used to check if the player is grounded.
     /// </summary>
@@ -159,6 +161,7 @@ public class EntityMovement2D : MonoBehaviour
             {
                 _animator.SetBool("walking", true);
                 _rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
+                _spriteRenderer.flipX = xInput < 0;
 
                 if (_isOnGround && !_walkPart.isPlaying)
                 {
@@ -167,7 +170,7 @@ public class EntityMovement2D : MonoBehaviour
                 }
             }
 
-            if (_isOnGround && xInput == 0)
+            if (_isOnGround && xInput == 0)                             
             {
                 _rigidbody.velocity *= _friction;
                 _walkPart.Stop();
@@ -224,11 +227,12 @@ public class EntityMovement2D : MonoBehaviour
     }
     #endregion
 
-    /// <summary>
+    /// <summary>                                       
     /// Makes the player jump and set [_isOnGround] to false.
     /// </summary>
     private void DoJump()
     {
+        _animator.SetBool("walking", false);
         _animator.SetBool("jumping", true);
         _rigidbody.gravityScale = _fallingGravityScale;
         idleTimer = 0f;
