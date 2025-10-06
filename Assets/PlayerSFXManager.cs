@@ -14,6 +14,8 @@ public class PlayerSFXManager : BasicAudioListener
 
 	private float _volume;
 
+	private AudioSource _danceSrc;
+
 	protected override void UpdateVolume(float value)
 	{
 		base.UpdateVolume(value);
@@ -56,6 +58,22 @@ public class PlayerSFXManager : BasicAudioListener
 		source.volume = _volume;
 		source.clip = _sfxs[key];
 		source.Play();
-		Destroy(source.gameObject, 2f);
+
+		if(key == "Dance")
+		{
+			_danceSrc = source;
+		}
+
+		Destroy(source.gameObject, key == "Dance" ? 30f : 2f);
 	}
+
+    internal void PlayDance()
+    {
+		PlaySfx("Dance");
+    }
+
+    internal void StopDance()
+    {
+		Destroy(_danceSrc);
+    }
 }

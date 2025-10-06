@@ -912,7 +912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _credits: {fileID: 1765320756}
   _quitPanel: {fileID: 1736472972}
-  _mainMenuPanel: {fileID: 512851676}
+  _mainMenuPanel: {fileID: 0}
 --- !u!114 &83200441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,12 +948,12 @@ MonoBehaviour:
   _theList: {fileID: 342853928}
   _map: {fileID: 1179146553}
   _button: {fileID: 884617154}
-  _mapHidden: {fileID: 66459101}
-  _doorToRemove: {fileID: 1181315972}
-  _wallToRemove: {fileID: 1464560840}
-  _cameraBoundToRemove: {fileID: 787119667}
+  _mapHidden: {fileID: 0}
+  _doorToRemove: {fileID: 0}
+  _wallToRemove: {fileID: 0}
+  _cameraBoundToRemove: {fileID: 0}
   _successPanel: {fileID: 174817519}
-  _theEndPanel: {fileID: 2130768454}
+  _theEndPanel: {fileID: 0}
   _pauseMenu: {fileID: 83200443}
   _fadeDuration: 0.1
   _fadout: 0.1
@@ -7152,6 +7152,30 @@ PrefabInstance:
       propertyPath: _pauseController
       value: 
       objectReference: {fileID: 375426779}
+    - target: {fileID: 1339360105376414418, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
+      propertyPath: _sfxs._keys.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339360105376414418, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
+      propertyPath: _sfxs._values.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339360105376414418, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
+      propertyPath: _sfxs._keys.Array.data[5]
+      value: Dance
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339360105376414418, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
+      propertyPath: _sfxs._keyValues.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1339360105376414418, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
+      propertyPath: _sfxs._values.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: 45da0b4d213de5747b444ae94e56b0d3, type: 3}
+    - target: {fileID: 1339360105376414418, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
+      propertyPath: _sfxs._keyValues.Array.data[5]
+      value: Dance
+      objectReference: {fileID: 0}
     - target: {fileID: 1689370970689725436, guid: 8321b3c71cd3b744aacdd270c49133e9, type: 3}
       propertyPath: _respawnPoint
       value: 
@@ -18269,11 +18293,6 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7084268982386889694, guid: 08780c8686eb5f6498a3002e347b5f1a, type: 3}
   m_PrefabInstance: {fileID: 1922018039}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1181315972 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3412021530662576218, guid: e531deaa8a102e64ea0f2aaa7bd48352, type: 3}
-  m_PrefabInstance: {fileID: 1343043913}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1186126932
 GameObject:
@@ -32688,11 +32707,6 @@ PrefabInstance:
 --- !u!224 &2130768453 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1561638991508761508, guid: 5976421c4ebe526439fbb34f421b3744, type: 3}
-  m_PrefabInstance: {fileID: 2130768452}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2130768454 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8973093983857662393, guid: 5976421c4ebe526439fbb34f421b3744, type: 3}
   m_PrefabInstance: {fileID: 2130768452}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2133968827
