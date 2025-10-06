@@ -10524,6 +10524,10 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 87380599367990011, guid: be18ae95fe4a1f840ae02ac87841b2ad, type: 3}
+      propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].time
+      value: 0.26493996
+      objectReference: {fileID: 0}
     - target: {fileID: 2000922207083208132, guid: be18ae95fe4a1f840ae02ac87841b2ad, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22
