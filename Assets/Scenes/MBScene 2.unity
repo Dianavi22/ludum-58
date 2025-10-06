@@ -912,6 +912,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _credits: {fileID: 1765320756}
   _quitPanel: {fileID: 1736472972}
+  _mainMenuPanel: {fileID: 512851676}
 --- !u!114 &83200441
 MonoBehaviour:
   m_ObjectHideFlags: 0

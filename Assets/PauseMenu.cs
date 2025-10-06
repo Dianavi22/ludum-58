@@ -10,10 +10,7 @@ public class PauseMenu : MonoBehaviour
         get; private set;
     }
 
-    public static bool IsMainMenu
-    {
-        get; private set;
-    }
+    public static bool IsMainMenu;
 
     public static bool IsInTheEnd;
     

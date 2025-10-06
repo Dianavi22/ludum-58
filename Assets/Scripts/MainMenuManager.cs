@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Rewards.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,10 +8,14 @@ public class MainMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _credits;
     [SerializeField] private GameObject _quitPanel;
+    [SerializeField] private GameObject _mainMenuPanel;
     public void PlayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        _quitPanel.SetActive(false);
+        _mainMenuPanel.SetActive(false);
+        PauseMenu.IsMainMenu = false;
     }
+    
     public void OpenCredits()
     {
         _credits.SetActive(true);
@@ -33,6 +38,7 @@ public class MainMenuManager : MonoBehaviour
     public void HardReset()
     {
         PlayerPrefs.DeleteAll();
+        PlayerPrefsUtils.SetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME, false);
         PlayGame();
     }
 
