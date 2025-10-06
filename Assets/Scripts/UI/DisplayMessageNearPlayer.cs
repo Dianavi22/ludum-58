@@ -15,14 +15,14 @@ public class DisplayMessageNearPlayer : MonoBehaviour
 
     private void Awake()
     {
-        _tmp = GetComponentInChildren<TextMeshPro>();
+        _tmp = GetComponentInChildren<TextMeshPro>(true);
         _tmp.text = _text;
         _tmp.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.attachedRigidbody.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             _tmp.gameObject.SetActive(true);
         }
@@ -30,7 +30,7 @@ public class DisplayMessageNearPlayer : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.attachedRigidbody.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             _tmp.gameObject.SetActive(false);
         }

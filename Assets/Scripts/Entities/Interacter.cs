@@ -43,7 +43,7 @@ public class Interacter : MonoBehaviour
 
             foreach (Collider2D hit in hits)
             {
-                if (Tools.IsLayerWithinMask(hit.attachedRigidbody.gameObject.layer, _canInteractWith) && hit.attachedRigidbody.TryGetComponent<IInteractable>(out IInteractable interactable))
+                if (Tools.IsLayerWithinMask(hit.gameObject.layer, _canInteractWith) && hit.attachedRigidbody.TryGetComponent<IInteractable>(out IInteractable interactable))
                 {
                     float distance = Vector2.Distance(transform.position, hit.transform.position);
                     if (distance < minDist)
