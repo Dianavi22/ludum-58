@@ -30,8 +30,14 @@ public class SequenceDetector : MonoBehaviour
             ResetSequence();
         }
 
+        bool @override = false;
 
-        if (Input.GetKeyDown(_konamiCode[_currentIndex]))
+        if (_konamiCode[_currentIndex] == KeyCode.A)
+        {
+            @override = Input.GetKeyDown(KeyCode.Q);
+        }
+
+        if (Input.GetKeyDown(_konamiCode[_currentIndex]) | @override)
         {
             _currentIndex++;
             _lastInputTime = Time.time;

@@ -114,6 +114,8 @@ public class EntityMovement2D : MonoBehaviour
 
             if (_isFalling && _rigidbody.gravityScale != _fallingGravityScale * 2)
             {
+                _sfxManager.StopDance();
+                _animator.SetBool("dancing", false);
                 _animator.SetBool("jumping", false);
                 _animator.SetBool("falling", true);
                 _rigidbody.gravityScale = _fallingGravityScale * 2;
@@ -139,6 +141,12 @@ public class EntityMovement2D : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            _sfxManager.PlayDance();
+            _animator.SetBool("dancing", true);
+        }
+
         _wasOnGround = _isOnGround;
     }
 
@@ -162,6 +170,8 @@ public class EntityMovement2D : MonoBehaviour
 
             if (Mathf.Abs(xInput) > 0.01f)
             {
+                _sfxManager.StopDance();
+                _animator.SetBool("dancing", false);
                 _animator.SetBool("walking", true);
                 _rigidbody.velocity = new Vector2(_horizontalSpeed * Input.GetAxisRaw("Horizontal"), _rigidbody.velocity.y);
                 _spriteRenderer.flipX = xInput < 0;
@@ -246,6 +256,8 @@ public class EntityMovement2D : MonoBehaviour
     {
         _sfxManager.PlayJump();
         _sfxManager.StopWalk();
+        _sfxManager.StopDance();
+        _animator.SetBool("dancing", false);
         _animator.SetBool("walking", false);
         _animator.SetBool("jumping", true);
         _rigidbody.gravityScale = _fallingGravityScale;

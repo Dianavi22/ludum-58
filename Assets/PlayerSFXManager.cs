@@ -14,6 +14,8 @@ public class PlayerSFXManager : BasicAudioListener
 
 	private float _volume;
 
+	private AudioSource _danceSrc;
+
 	protected override void UpdateVolume(float value)
 	{
 		base.UpdateVolume(value);
@@ -27,12 +29,12 @@ public class PlayerSFXManager : BasicAudioListener
 
 	public void PlayWalk()
 	{
-		_source.Play();
+		//_source.Play();
 	}
 
 	public void StopWalk()
 	{
-		_source.Stop();
+		//_source.Stop();
 	}
 
 	public void PlayHitGround()
@@ -50,10 +52,28 @@ public class PlayerSFXManager : BasicAudioListener
 		PlaySfx("Jump" + UnityEngine.Random.Range(0, 2));
 	}
 
-	private void PlaySfx(string key) {
+	private void PlaySfx(string key)
+	{
 		AudioSource source = Instantiate(_sfxPlayer).GetComponent<AudioSource>();
 		source.volume = _volume;
 		source.clip = _sfxs[key];
 		source.Play();
+
+		if(key == "Dance")
+		{
+			_danceSrc = source;
+		}
+
+		Destroy(source.gameObject, key == "Dance" ? 30f : 2f);
 	}
+
+    internal void PlayDance()
+    {
+		PlaySfx("Dance");
+    }
+
+    internal void StopDance()
+    {
+		Destroy(_danceSrc);
+    }
 }
