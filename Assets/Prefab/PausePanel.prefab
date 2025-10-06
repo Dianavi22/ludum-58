@@ -87,13 +87,13 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.483
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 5645707122914540224}
         m_TargetAssemblyTypeName: PausePanelController, Assembly-CSharp
-        m_MethodName: OnVolumeChanged
+        m_MethodName: OnSliderChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -786,6 +786,7 @@ MonoBehaviour:
   _slider: {fileID: 8412750623343034617}
   _muteButtonSwapper: {fileID: 1743599973553293847}
   _volumeBarTMP: {fileID: 7357283229592703076}
+  _soundManager: {fileID: 0}
 --- !u!1 &5257499353050680201
 GameObject:
   m_ObjectHideFlags: 0

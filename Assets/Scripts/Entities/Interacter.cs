@@ -24,17 +24,20 @@ public class Interacter : MonoBehaviour
     [SerializeField, Tooltip("Keycode that this interacter interacts with.")] private KeyCode _keycode;
 
     [SerializeField] Animator _animator;
-    /// <summary>
-    /// Event raised when interacting with an interactable object.
-    /// </summary>    
-    private readonly UnityEvent<IInteractable> _interactEvent = new();
-	public UnityEvent<IInteractable> InteractEvent => _interactEvent;
+
+    private PlayerSFXManager _sfxManager;
+
+    private void Awake()
+    {
+        _sfxManager = GetComponentInChildren<PlayerSFXManager>();
+    }
 
     private void Update()
     {
         // On interact: gets all interactable in range and interact with the closest one.
         if (Input.GetKeyDown(_keycode))
         {
+            _sfxManager.PlayInteract();
             _animator.SetTrigger("interact");
 
             IInteractable nearestInteractable = null;
@@ -55,7 +58,6 @@ public class Interacter : MonoBehaviour
             }
 
             nearestInteractable?.Interact();
-            _interactEvent.Invoke(nearestInteractable);
         }
     }
 

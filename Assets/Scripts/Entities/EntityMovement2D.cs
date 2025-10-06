@@ -41,6 +41,8 @@ public class EntityMovement2D : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] SpriteRenderer _spriteRenderer;
 
+    private PlayerSFXManager _sfxManager;
+
     /// <summary>
     /// The box collider used to check if the player is grounded.
     /// </summary>
@@ -75,6 +77,7 @@ public class EntityMovement2D : MonoBehaviour
     #region Object lifecycle
     private void Awake()
     {
+        _sfxManager = GetComponentInChildren<PlayerSFXManager>();
         _rigidbody = GetComponent<Rigidbody2D>();
         _collider = GetComponentInChildren<BoxCollider2D>();
 
@@ -101,6 +104,7 @@ public class EntityMovement2D : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && _isOnGround)
         {
             _jumpedHigher = _highestPoint.position.y <= transform.position.y;
+            _isOnGround = false;
             DoJump();
         }
 
@@ -139,7 +143,7 @@ public class EntityMovement2D : MonoBehaviour
     }
 
 
-    [SerializeField] private float idleTimeMax ; 
+    [SerializeField] private float idleTimeMax;
     private float idleTimer = 0f;
 
     private void FixedUpdate()
@@ -147,8 +151,8 @@ public class EntityMovement2D : MonoBehaviour
         if (SuccessMapManager.IsFading || PauseMenu.IsPause || PauseMenu.IsMainMenu)
             return;
 
-        _isOnGround = 0 < Physics2D.OverlapAreaAll(_groundChecker.bounds.min, _groundChecker.bounds.max, _jumpableLayers).Length;
-        
+        _isOnGround = 0 < Physics2D.BoxCastAll(transform.position, _groundChecker.size, 0, Vector2.down, 0.65f, _jumpableLayers).Length;
+
         float xInput = Input.GetAxis("Horizontal");
         bool hasInput = Mathf.Abs(xInput) > 0.01f;
 
@@ -167,13 +171,19 @@ public class EntityMovement2D : MonoBehaviour
                     _walkPart.Play();
                     _animator.SetBool("jumping", false);
                 }
+
+                if (_isOnGround && !_sfxManager.IsPlayingWalk)
+                {
+                    _sfxManager.PlayWalk();
+                }
             }
 
-            if (_isOnGround && xInput == 0)                             
+            if (_isOnGround && xInput == 0)
             {
                 _rigidbody.velocity *= _friction;
                 _walkPart.Stop();
                 _animator.SetBool("walking", false);
+                _sfxManager.StopWalk();
             }
         }
         else
@@ -184,8 +194,9 @@ public class EntityMovement2D : MonoBehaviour
             {
                 _walkPart.Stop();
                 _animator.SetBool("walking", false);
+                _sfxManager.StopWalk();
             }
-                
+
 
             if (idleTimer >= idleTimeMax)
             {
@@ -205,10 +216,11 @@ public class EntityMovement2D : MonoBehaviour
         {
             _successMapManager.LaunchSuccessAnim(PlayerPrefsData.MEGA_JUMP);
         }
-        
-	}
 
-	private void OnTriggerEnter2D(Collider2D collision)
+        _sfxManager.PlayHitGround();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Death") && _respawnable != null)
         {
@@ -223,6 +235,7 @@ public class EntityMovement2D : MonoBehaviour
     private void Respawn()
     {
         _respawnable.Respawn();
+        _sfxManager.PlayDeath();
     }
     #endregion
 
@@ -231,6 +244,8 @@ public class EntityMovement2D : MonoBehaviour
     /// </summary>
     private void DoJump()
     {
+        _sfxManager.PlayJump();
+        _sfxManager.StopWalk();
         _animator.SetBool("walking", false);
         _animator.SetBool("jumping", true);
         _rigidbody.gravityScale = _fallingGravityScale;

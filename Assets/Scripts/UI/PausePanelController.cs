@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PausePanelController : MonoBehaviour
@@ -29,7 +30,11 @@ public class PausePanelController : MonoBehaviour
     /// <summary>
     /// Gets the percentage of the volume.
     /// </summary>
-    public float Volume => Mathf.RoundToInt(_volume * 100);
+    public int Volume => Mathf.RoundToInt(_volume * 100);
+    public float RealVolume => _volume;
+
+    private UnityEvent<float> _onVolumeChanged = new();
+    public UnityEvent<float> OnVolumeChanged => _onVolumeChanged;
 
     /// <summary>
     /// Save of the previous volume when muting through the mute button.
@@ -41,10 +46,13 @@ public class PausePanelController : MonoBehaviour
     /// </summary>
     private bool _isMuted;
 
+    [SerializeField] PlayerSFXManager _soundManager;
+
     private void Start()
     {
-        _volume = _slider.value;
-        OnVolumeChanged(); //TODO: load persistant data & update slider's value accordingly --> maybe update through the slider directly so this doesn't change?
+        float volume = PlayerPrefs.GetFloat(PlayerPrefsData.VOLUME, 0.5f);
+        _slider.value = volume;
+        ChangeVolume(volume);
     }
 
     /// <summary>
@@ -76,7 +84,7 @@ public class PausePanelController : MonoBehaviour
     /// <summary>
     /// Callback when the [_slider] value changes.
     /// </summary>
-    public void OnVolumeChanged()
+    public void OnSliderChanged()
     {
         ChangeVolume( _slider.value);
 
@@ -105,7 +113,8 @@ public class PausePanelController : MonoBehaviour
     /// <param name="value">The value to set the volume to</param>
     private void ChangeVolume(float value)
     {
-        //TODO: set volume to [value] & set persistant data
+        PlayerPrefs.SetFloat(PlayerPrefsData.VOLUME, value);
+        _onVolumeChanged?.Invoke(value);
         _volume = value;
         _isMuted = value == 0;
         _volumeBarTMP.text = Mathf.RoundToInt(_volume * 100) + "%";
