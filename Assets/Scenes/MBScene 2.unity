@@ -6890,15 +6890,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2667481109618792304, guid: 91fac7ba84d23174c9631f5fd8eb8032, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42.911495
+      value: 43.39
       objectReference: {fileID: 0}
     - target: {fileID: 2667481109618792304, guid: 91fac7ba84d23174c9631f5fd8eb8032, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.56
+      value: -0.99
       objectReference: {fileID: 0}
     - target: {fileID: 2667481109618792304, guid: 91fac7ba84d23174c9631f5fd8eb8032, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.923481
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2667481109618792304, guid: 91fac7ba84d23174c9631f5fd8eb8032, type: 3}
       propertyPath: m_LocalRotation.w
@@ -8399,7 +8399,7 @@ GameObject:
   - component: {fileID: 618951603}
   - component: {fileID: 618951602}
   - component: {fileID: 618951601}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}

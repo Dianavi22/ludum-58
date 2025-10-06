@@ -148,8 +148,14 @@ public class EntityMovement2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (SuccessMapManager.IsFading || PauseMenu.IsPause || PauseMenu.IsMainMenu)
+        if (SuccessMapManager.IsFading || PauseMenu.IsPause || PauseMenu.IsMainMenu || _successMapManager.uiFaderIsFadeIn)
+        {
+            _rigidbody.velocity *= _friction;
+            _walkPart.Stop();
+            _animator.SetBool("walking", false);
+            _sfxManager.StopWalk();
             return;
+        }
 
         _isOnGround = 0 < Physics2D.BoxCastAll(transform.position, _groundChecker.size, 0, Vector2.down, 0.65f, _jumpableLayers).Length;
 
@@ -224,6 +230,7 @@ public class EntityMovement2D : MonoBehaviour
     {
         if (collision.CompareTag("Death") && _respawnable != null)
         {
+            _jumpedHigher = false;
             _sc.ShakyCameCustom(0.15f, 0.3f);
             _deathPart.gameObject.transform.position = new Vector3(transform.position.x, -5, 0);
             _deathPart.Play();
