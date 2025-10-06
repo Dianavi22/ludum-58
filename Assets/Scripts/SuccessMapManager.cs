@@ -46,7 +46,10 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] List<Animator> _successAnimators;
     [SerializeField] ParticleSystem _glowSuccessPart;
     [SerializeField] ParticleSystem _doorPart;
+    [SerializeField] ParticleSystem _wallPart;
+    [SerializeField] ParticleSystem _mapHiddenPart;
 
+    private bool _taMere = false;
     public bool uiFaderIsFadeIn => _achievementFader.isFadeIn;
 
     private void Start()
@@ -167,6 +170,13 @@ public class SuccessMapManager : MonoBehaviour
 
         _button.SetActive(any);
         _mapHidden.SetActive(any);
+        if(_mapHidden.activeSelf && !PlayerPrefsUtils.GetBool(PlayerPrefsData.IS_NOT_THE_FIRST_TIME) && !_taMere)
+        {
+            _mapHiddenPart.Play();
+            _taMere = true;
+        }
+       
+
     }
 
     private void ClearSuccessPanel()
@@ -196,6 +206,7 @@ public class SuccessMapManager : MonoBehaviour
                     _wallToRemove.SetActive(false);
                     _doorToRemove.SetActive(false);
                     _doorPart.Play();
+                    _wallPart.Play();
                     _cameraBoundToRemove.SetActive(false);
                     //Invoke("ShowTheEnd", 0.5f);
                 }
