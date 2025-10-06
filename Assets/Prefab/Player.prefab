@@ -82,7 +82,7 @@ MonoBehaviour:
     - Jump0
     - Jump1
     _values:
-    - {fileID: 8300000, guid: d113679129fc34f4aad00956d736f417, type: 3}
+    - {fileID: 8300000, guid: d7130b5123496554895a32deabf40859, type: 3}
     - {fileID: 8300000, guid: 58149c6d34f4fe842af21c4ef9b8de91, type: 3}
     - {fileID: 8300000, guid: 425bc417b406afc4badb4c1715516799, type: 3}
     - {fileID: 8300000, guid: cb52eb4c94d2536448cffd0d214bb978, type: 3}

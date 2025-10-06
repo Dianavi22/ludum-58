@@ -213,12 +213,6 @@ public class SuccessMapManager : MonoBehaviour
             });
         }
 
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            ShowSuccessMap();
-        }
-
         if (Input.anyKeyDown && _theEndPanel.activeInHierarchy && _theEndPanel.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1)
         {
             PlayerPrefs.DeleteAll();
