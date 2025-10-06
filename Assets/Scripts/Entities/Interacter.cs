@@ -17,6 +17,7 @@ public class Interacter : MonoBehaviour
     /// Whether the show the gizmos or not.
     /// </summary>
     [SerializeField, Tooltip("Display the gizmos for debug purpose.")] private bool _debugShowGizmos;
+    [SerializeField] ShakyCam _shakyCam;
 
     /// <summary>
     /// Key that this interacter will react with.
@@ -54,6 +55,9 @@ public class Interacter : MonoBehaviour
                         minDist = distance;
                         nearestInteractable = interactable;
                     }
+
+                    _shakyCam.ShakyCameCustom(0.15f, 0.1f);
+
                 }
             }
 
