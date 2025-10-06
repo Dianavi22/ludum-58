@@ -293,7 +293,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5717275479002236566}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &6350094119222183364
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -482,7 +482,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 4
+      minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
@@ -548,8 +548,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.03
+      scalar: 0.1
+      minScalar: 0.01
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -872,7 +872,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 1.6
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -1131,7 +1131,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -5119,6 +5119,8 @@ GameObject:
   m_Component:
   - component: {fileID: 9130741840833710496}
   - component: {fileID: 4579630864688058954}
+  - component: {fileID: 8063432973192144433}
+  - component: {fileID: 6072670982707369720}
   m_Layer: 0
   m_Name: Gfx
   m_TagString: Player
@@ -5135,9 +5137,9 @@ Transform:
   m_GameObject: {fileID: 6360826695894874953}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: -0.12, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5717275479002236566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5182,7 +5184,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 465196810, guid: 950dd1c10c9dbcf48b26085d2df35851, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5193,6 +5195,49 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &8063432973192144433
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6360826695894874953}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: a510a015462de0d45a468a57e1fb3183, type: 2}
+  - {fileID: 7400000, guid: eb0ab93566e1bae428791bf8524f661e, type: 2}
+  - {fileID: 7400000, guid: e807fd31cf76b964f82377d0359499b1, type: 2}
+  - {fileID: 7400000, guid: 6575e7fc4c7948e438d38b9deb70027c, type: 2}
+  - {fileID: 7400000, guid: 4ec6c57d5a65828418144ee35c94c951, type: 2}
+  - {fileID: 7400000, guid: 5773fd03bee449649b8ee78e1fc01375, type: 2}
+  - {fileID: 7400000, guid: a510a015462de0d45a468a57e1fb3183, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &6072670982707369720
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6360826695894874953}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0882419e7eb60c444872ccd81c7ec265, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8407526859117712926
 GameObject:
   m_ObjectHideFlags: 0
@@ -5219,13 +5264,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8407526859117712926}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.001999855, y: -0.666, z: 0.061}
-  m_LocalScale: {x: 0.9158988, y: 0.9158988, z: 0.9158988}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5717275479002236566}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &5536195784047316889
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -5362,8 +5407,8 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 30
-      minScalar: 20
+      scalar: 8
+      minScalar: 0.8
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5414,19 +5459,19 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 4
+      minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0, g: 0.8018868, b: 0.12994021, a: 1}
-        key1: {r: 0.006436473, g: 0.69367373, b: 0.101276934, a: 1}
-        key2: {r: 0.009611895, g: 0.640287, b: 0.087135956, a: 0}
-        key3: {r: 0.013130484, g: 0.5811308, b: 0.071466774, a: 0}
-        key4: {r: 0.017507184, g: 0.5075476, b: 0.051976196, a: 0}
-        key5: {r: 0.023772031, g: 0.40221998, b: 0.02407721, a: 0}
-        key6: {r: 0.026174923, g: 0.36182138, b: 0.013376503, a: 0}
-        key7: {r: 0.029178679, g: 0.31132078, b: 0, a: 0}
+        key0: {r: 1, g: 0.5424528, b: 0.95420974, a: 1}
+        key1: {r: 0.754717, g: 0.18155926, b: 0.6376627, a: 1}
+        key2: {r: 0.8773585, g: 0.3517711, b: 0.8684492, a: 0}
+        key3: {r: 0.7858146, g: 0.49167854, b: 0.8207547, a: 0}
+        key4: {r: 0.8207547, g: 0.46070665, b: 0.77458316, a: 0}
+        key5: {r: 0.6698113, g: 0.5144475, b: 0.38229796, a: 0}
+        key6: {r: 0.9150943, g: 0.6252215, b: 0.5481933, a: 0}
+        key7: {r: 0.7169812, g: 0.49230155, b: 0.4295123, a: 0}
         ctime0: 0
         ctime1: 9638
         ctime2: 21588
@@ -5443,7 +5488,7 @@ ParticleSystem:
         atime5: 0
         atime6: 0
         atime7: 0
-        m_Mode: 0
+        m_Mode: 1
         m_ColorSpace: 0
         m_NumColorKeys: 8
         m_NumAlphaKeys: 2
@@ -5480,8 +5525,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
-      minScalar: 0.08
+      scalar: 0.1
+      minScalar: 0.04
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5804,7 +5849,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15.07
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -5857,15 +5902,15 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 2
     angle: 68.9
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0.94
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 0.31, y: -0.01, z: 1}
+    m_Rotation: {x: -90, y: 0, z: 0}
+    m_Scale: {x: 0.95, y: -0.01, z: 1}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -5944,7 +5989,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1.7
+      value: 0.11
       mode: 0
       spread: 0
       speed:
@@ -9346,7 +9391,7 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0.023094177
+          time: 0
           value: 0
           inSlope: 0
           outSlope: 0
@@ -9355,7 +9400,7 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.03318052
+          time: 0.069988534
           value: 1
           inSlope: 4.369881
           outSlope: 4.369881
@@ -9364,8 +9409,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.29737896
-          value: 0.8500486
+          time: 0.5652775
+          value: 0.6878858
           inSlope: -3.1681218
           outSlope: -3.1681218
           tangentMode: 0
@@ -9373,8 +9418,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.3441162
-          value: 0.027023315
+          time: 0.7224352
+          value: 0.47296676
           inSlope: -2
           outSlope: -2
           tangentMode: 0
@@ -10177,7 +10222,7 @@ MonoBehaviour:
   _fallingGravityScale: 3.5
   _jumpableLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 1216
   _friction: 0.25
   _velocityGravityTreshhold: 4
   _successMapManager: {fileID: 0}
@@ -10185,8 +10230,8 @@ MonoBehaviour:
   _hitFloorPart: {fileID: 5536195784047316889}
   _deathPart: {fileID: 0}
   _sc: {fileID: 0}
-  _animator: {fileID: 0}
-  _spriteRenderer: {fileID: 0}
+  _animator: {fileID: 6072670982707369720}
+  _spriteRenderer: {fileID: 4579630864688058954}
   _groundChecker: {fileID: 3008139285240569052}
   _highestPoint: {fileID: 0}
   idleTimeMax: 30
@@ -10219,9 +10264,10 @@ MonoBehaviour:
   _canInteractWith:
     serializedVersion: 2
     m_Bits: 256
-  _debugShowGizmos: 1
+  _debugShowGizmos: 0
+  _shakyCam: {fileID: 0}
   _keycode: 101
-  _animator: {fileID: 0}
+  _animator: {fileID: 6072670982707369720}
 --- !u!114 &1179618914667531602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10289,7 +10335,7 @@ Transform:
   m_GameObject: {fileID: 9008886872641840360}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.525, z: 0}
+  m_LocalPosition: {x: 0, y: -0.618, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10338,5 +10384,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.05}
+  m_Size: {x: 1, y: 0.1}
   m_EdgeRadius: 0

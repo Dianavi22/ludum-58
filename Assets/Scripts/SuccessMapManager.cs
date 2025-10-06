@@ -45,6 +45,7 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] Vignette m_Vignette;
     [SerializeField] List<Animator> _successAnimators;
     [SerializeField] ParticleSystem _glowSuccessPart;
+    [SerializeField] ParticleSystem _doorPart;
 
     private void Start()
     {
@@ -192,6 +193,7 @@ public class SuccessMapManager : MonoBehaviour
                 {
                     _wallToRemove.SetActive(false);
                     _doorToRemove.SetActive(false);
+                    _doorPart.Play();
                     _cameraBoundToRemove.SetActive(false);
                     //Invoke("ShowTheEnd", 0.5f);
                 }
