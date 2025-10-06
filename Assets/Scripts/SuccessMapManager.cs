@@ -47,6 +47,8 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] ParticleSystem _glowSuccessPart;
     [SerializeField] ParticleSystem _doorPart;
 
+    public bool uiFaderIsFadeIn => _achievementFader.isFadeIn;
+
     private void Start()
     {
         GetAllSuccessState();
