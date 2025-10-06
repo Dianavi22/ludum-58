@@ -19,6 +19,10 @@ public class SuccessMapManager : MonoBehaviour
     [SerializeField] GameObject _theList;
     [SerializeField] GameObject _map;
     [SerializeField] GameObject _button;
+    [SerializeField] GameObject _mapHidden;
+    [SerializeField] GameObject _doorToRemove;
+    [SerializeField] GameObject _wallToRemove;
+    [SerializeField] GameObject _cameraBoundToRemove;
     [SerializeField] GameObject _successPanel;
     [SerializeField] GameObject _theEndPanel;
     [SerializeField] private PauseMenu _pauseMenu;
@@ -162,6 +166,7 @@ public class SuccessMapManager : MonoBehaviour
         }
 
         _button.SetActive(any);
+        _mapHidden.SetActive(any);
     }
 
     private void ClearSuccessPanel()
@@ -189,7 +194,10 @@ public class SuccessMapManager : MonoBehaviour
 
                 if (CheckFinal())
                 {
-                    Invoke("ShowTheEnd", 0.5f);
+                    _wallToRemove.SetActive(false);
+                    _doorToRemove.SetActive(false);
+                    _cameraBoundToRemove.SetActive(false);
+                    //Invoke("ShowTheEnd", 0.5f);
                 }
             });
         }
@@ -213,7 +221,7 @@ public class SuccessMapManager : MonoBehaviour
         LaunchSuccessAnim(PlayerPrefsData.FINAL_SUCCESS);
     }
 
-    private void ShowTheEnd()
+    public void ShowTheEnd()
     {
         PauseMenu.IsInTheEnd = true;
         _theEndPanel.SetActive(true);
