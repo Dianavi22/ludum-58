@@ -48,9 +48,6 @@ public class SuccessMapManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefsUtils.SetBool(PlayerPrefsData.KONAMI_CODE, false);
-        PlayerPrefsUtils.SetBool(PlayerPrefsData.FINAL_SUCCESS, false);
-        _achievementFader.FadeOut(0);
         GetAllSuccessState();
         ShowStateSuccess();
         m_Volume.profile.TryGetSettings(out m_Vignette);
@@ -177,7 +174,6 @@ public class SuccessMapManager : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetMouseButtonDown(0) && _achievementFader.isFadeIn)
         {
             _achievementFader.FadeOut(_fadout, () =>
